@@ -6,9 +6,9 @@ body:
   - type: markdown
     attributes:
       value: |
-        # Hotel Management bug report
+        # Student Management bug report
 
-        Important to note that your issue may have already been reported before. Please check for existing issues [here](https://github.com/EhsanulHaqueSiam/HotelManagementSystem/labels/bug).
+        Important to note that your issue may have already been reported before. Please check for existing issues [here](https://github.com/EhsanulHaqueSiam/StudentManagementSystem/labels/bug).
 
   - type: dropdown
     attributes:

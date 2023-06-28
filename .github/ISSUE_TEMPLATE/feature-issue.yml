@@ -6,10 +6,10 @@ body:
   - type: markdown
     attributes:
       value: |
-        # Hotel Management feature request
+        # Student Management feature request
         
-        Do not submit requests for Bugs here. Please submit them [here](https://github.com/EhsanulHaqueSiam/HotelManagementSystem/labels/bug) instead.
-        Important to note that your feature request may have already been made before. Please check for existing feature requests [here](https://github.com/EhsanulHaqueSiam/HotelManagementSystem/labels/feature-request).
+        Do not submit requests for Bugs here. Please submit them [here](https://github.com/EhsanulHaqueSiam/StudentManagementSystem/labels/bug) instead.
+        Important to note that your feature request may have already been made before. Please check for existing feature requests [here](https://github.com/EhsanulHaqueSiam/StudentManagementSystem/labels/feature-request).
 
   - type: dropdown
     attributes:
