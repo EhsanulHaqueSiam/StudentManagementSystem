@@ -19,7 +19,7 @@ To get started with the project, follow the instructions below:
 1. Clone the repository:
 
    ```
-   git clone https://github.com/your-username/student-management-system.git
+   git clone https://github.com/EhsanulHaqueSiam/student-management-system.git
    ```
 
 2. Open the project in your Java IDE.
