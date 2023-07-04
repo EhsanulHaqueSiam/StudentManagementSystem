@@ -59,17 +59,6 @@ To get started with the project, follow the instructions below:
 - Admin can create and manage courses, including adding new courses, modifying course information, and deleting courses.
 - Admin can define the registration day and manage the course registration process.
 
-## Contributing
-
-Contributions are welcome! If you would like to contribute to the project, please follow these guidelines:
-
-1. Fork the repository.
-2. Create a new branch for your feature or bug fix.
-3. Develop and test your code changes.
-4. Commit your changes with clear commit messages.
-5. Push your branch to your forked repository.
-6. Submit a pull request detailing your changes.
-
 ## License
 
 This project is licensed under the [MIT License](LICENSE). Feel free to use, modify, and distribute the code as per the terms of the license.
