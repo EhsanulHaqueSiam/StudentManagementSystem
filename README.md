@@ -12,8 +12,6 @@ To get started with the project, follow the instructions below:
 
 - MySQL Database: Install and set up a MySQL database on your machine. You can download the MySQL Community Server from the [official MySQL website](https://dev.mysql.com/downloads/installer/).
 
-- Java IDE: Choose a suitable Java Integrated Development Environment (IDE) for development. Popular options include Eclipse, IntelliJ IDEA, and NetBeans.
-
 ### Setting up the Project
 
 1. Clone the repository:
