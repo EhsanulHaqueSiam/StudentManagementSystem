@@ -1,19 +1,19 @@
-package com.sm;
+package main.java.com.studentmanagementsystem;
 
-import com.sm.controller.LoginController;
-import com.sm.util.DatabaseHelper;
+import main.java.com.studentmanagementsystem.controller.LoginController;
+import main.java.com.studentmanagementsystem.util.DatabaseHelper;
 
 public class Main {
 
-    public static void main(String[] args) {
-        
-        DatabaseHelper dbHelper = new DatabaseHelper();
-        dbHelper.initialize();
+  public static void main(String[] args) {
 
-        // Create a new login controller, which will in turn create the login view
-        LoginController loginController = new LoginController(dbHelper);
-        loginController.showLoginView();
+    DatabaseHelper dbHelper = new DatabaseHelper();
+    dbHelper.initialize();
 
-        // From here, the controller will handle interaction with the user
-    }
+    // Create a new login controller, which will in turn create the login view
+    LoginController loginController = new LoginController(dbHelper);
+    loginController.showLoginView();
+
+    // From here, the controller will handle interaction with the user
+  }
 }

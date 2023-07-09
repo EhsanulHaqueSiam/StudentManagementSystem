@@ -1,9 +1,9 @@
-package com.sm.controller;
+package main.java.com.studentmanagementsystem.controller;
 
-import com.sm.model.Student;
-import com.sm.model.Teacher;
-import com.sm.model.Admin;
-import com.sm.util.DatabaseHelper;
+import main.java.com.studentmanagementsystem.model.Student;
+import main.java.com.studentmanagementsystem.model.Teacher;
+import main.java.com.studentmanagementsystem.model.Admin;
+import main.java.com.studentmanagementsystem.util.DatabaseHelper;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,71 +11,71 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class LoginController {
-    private DatabaseHelper dbHelper;
+  private DatabaseHelper dbHelper;
 
-    public LoginController() {
-        dbHelper = DatabaseHelper.getInstance();
+  public LoginController() {
+    dbHelper = DatabaseHelper.getInstance();
+  }
+
+  public Student validateStudentLogin(String email, String password) {
+    Student student = null;
+
+    String query = "SELECT * FROM students WHERE email = ? AND password = ?";
+    try (Connection conn = dbHelper.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(query)) {
+
+      stmt.setString(1, email);
+      stmt.setString(2, password);
+      ResultSet rs = stmt.executeQuery();
+
+      if (rs.next()) {
+        student = new Student(rs.getInt("studentId"), rs.getString("name"), rs.getString("bloodGroup"),
+            rs.getString("dateOfBirth"), rs.getString("mobileNumber"), rs.getString("email"), rs.getString("program"),
+            rs.getString("gender"), rs.getString("semester"));
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
     }
+    return student;
+  }
 
-    public Student validateStudentLogin(String email, String password) {
-        Student student = null;
+  public Teacher validateTeacherLogin(String email, String password) {
+    Teacher teacher = null;
 
-        String query = "SELECT * FROM students WHERE email = ? AND password = ?";
-        try (Connection conn = dbHelper.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+    String query = "SELECT * FROM teachers WHERE email = ? AND password = ?";
+    try (Connection conn = dbHelper.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(query)) {
 
-            stmt.setString(1, email);
-            stmt.setString(2, password);
-            ResultSet rs = stmt.executeQuery();
+      stmt.setString(1, email);
+      stmt.setString(2, password);
+      ResultSet rs = stmt.executeQuery();
 
-            if (rs.next()) {
-                student = new Student(rs.getInt("studentId"), rs.getString("name"), rs.getString("bloodGroup"), 
-                rs.getString("dateOfBirth"), rs.getString("mobileNumber"), rs.getString("email"), rs.getString("program"), 
-                rs.getString("gender"), rs.getString("semester"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return student;
+      if (rs.next()) {
+        teacher = new Teacher(/* fill in necessary parameters from the ResultSet*/);
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
     }
-    
-    public Teacher validateTeacherLogin(String email, String password) {
-        Teacher teacher = null;
+    return teacher;
+  }
 
-        String query = "SELECT * FROM teachers WHERE email = ? AND password = ?";
-        try (Connection conn = dbHelper.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+  public Admin validateAdminLogin(String email, String password) {
+    Admin admin = null;
 
-            stmt.setString(1, email);
-            stmt.setString(2, password);
-            ResultSet rs = stmt.executeQuery();
+    String query = "SELECT * FROM admins WHERE email = ? AND password = ?";
+    try (Connection conn = dbHelper.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(query)) {
 
-            if (rs.next()) {
-                teacher = new Teacher(/* fill in necessary parameters from the ResultSet*/);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return teacher;
+      stmt.setString(1, email);
+      stmt.setString(2, password);
+      ResultSet rs = stmt.executeQuery();
+
+      if (rs.next()) {
+        admin = new Admin(/* fill in necessary parameters from the ResultSet*/);
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
     }
-    
-    public Admin validateAdminLogin(String email, String password) {
-        Admin admin = null;
-
-        String query = "SELECT * FROM admins WHERE email = ? AND password = ?";
-        try (Connection conn = dbHelper.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
-
-            stmt.setString(1, email);
-            stmt.setString(2, password);
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                admin = new Admin(/* fill in necessary parameters from the ResultSet*/);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return admin;
-    }
+    return admin;
+  }
 }
