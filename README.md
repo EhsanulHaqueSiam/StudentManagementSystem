@@ -32,7 +32,7 @@ To get started with the project, follow the instructions below:
    - The project uses JDBC for database connectivity. Make sure the JDBC driver is included in your project's classpath. You can find the JDBC driver for MySQL on the [official MySQL website](https://dev.mysql.com/downloads/connector/j/).
 
 5. Build and run the project:
-   - Build the project using your IDE's build tools.
+   - Build the project.
    - Run the project to launch the Student Management System.
 
 ## Features
