@@ -1,51 +1,50 @@
 package main.java.com.studentmanagementsystem.model;
 
-import java.util.List;
-
+/**
+ * Represents a course in the student management system.
+ * Each course has a course identifier, a course name, course credits, and course duration.
+ */
 public class Course {
+
   private String courseId;
   private String courseName;
-  private String courseDescription;
   private int courseCredits;
-  private Teacher courseInstructor;
-  private List<Student> enrolledStudents;
+  private int courseDuration;
 
-  // Constructor
-  public Course(String courseId, String courseName, String courseDescription, int courseCredits, Teacher courseInstructor, List<Student> enrolledStudents) {
+  /**
+   * Creates a new course with the specified details.
+   *
+   * @param courseId       The unique identifier of the course.
+   * @param courseName     The name of the course.
+   * @param courseCredits  The number of credits associated with the course.
+   * @param courseDuration The duration of the course in weeks.
+   */
+  public Course(String courseId, String courseName, int courseCredits, int courseDuration) {
     this.courseId = courseId;
     this.courseName = courseName;
-    this.courseDescription = courseDescription;
     this.courseCredits = courseCredits;
-    this.courseInstructor = courseInstructor;
-    this.enrolledStudents = enrolledStudents;
+    this.courseDuration = courseDuration;
   }
 
-  // Getters
+  public Course() {
+  }
+
   public String getCourseId() {
-    return courseId;
+    return this.courseId;
   }
 
   public String getCourseName() {
-    return courseName;
-  }
-
-  public String getCourseDescription() {
-    return courseDescription;
+    return this.courseName;
   }
 
   public int getCourseCredits() {
-    return courseCredits;
+    return this.courseCredits;
   }
 
-  public Teacher getCourseInstructor() {
-    return courseInstructor;
+  public int getCourseDuration() {
+    return this.courseDuration;
   }
 
-  public List<Student> getEnrolledStudents() {
-    return enrolledStudents;
-  }
-
-  // Setters
   public void setCourseId(String courseId) {
     this.courseId = courseId;
   }
@@ -54,32 +53,18 @@ public class Course {
     this.courseName = courseName;
   }
 
-  public void setCourseDescription(String courseDescription) {
-    this.courseDescription = courseDescription;
-  }
-
   public void setCourseCredits(int courseCredits) {
     this.courseCredits = courseCredits;
   }
 
-  public void setCourseInstructor(Teacher courseInstructor) {
-    this.courseInstructor = courseInstructor;
+  public void setCourseDuration(int courseDuration) {
+    this.courseDuration = courseDuration;
   }
 
-  public void setEnrolledStudents(List<Student> enrolledStudents) {
-    this.enrolledStudents = enrolledStudents;
-  }
-
-  // Override toString method for pretty print
   @Override
   public String toString() {
-    return "Course{" +
-        "courseId='" + courseId + '\'' +
-        ", courseName='" + courseName + '\'' +
-        ", courseDescription='" + courseDescription + '\'' +
-        ", courseCredits=" + courseCredits +
-        ", courseInstructor=" + courseInstructor +
-        ", enrolledStudents=" + enrolledStudents +
-        '}';
+    return "Course(courseId=" + this.getCourseId() + ", courseName=" + this.getCourseName()
+        + ", courseCredits=" + this.getCourseCredits() + ", courseDuration="
+        + this.getCourseDuration() + ")";
   }
 }
