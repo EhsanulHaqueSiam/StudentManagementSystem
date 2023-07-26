@@ -1,29 +1,37 @@
 package main.java.com.studentmanagementsystem.model;
 
-import java.time.LocalDate;
+import java.util.Date;
+
+/**
+ * Represents a student in the student management system.
+ * Each student has a unique identifier, a name, a contact number,
+ * an enrollment year, and an email address.
+ */
 
 public class Student {
   private String studentId;
   private String name;
-  private String bloodGroup;
-  private LocalDate dob; // using java.time.LocalDate to represent date
-  private String mobileNumber;
+  private String contact;
   private String email;
-  private String program; // BSc, MSc, etc.
-  private String gender; // could use an Enum here as well
-  private String semester; // Fall 2022-2023, etc.
+  private Date enrollYear;
+
+  /**
+   * Creates a new student with the specified details.
+   *
+   * @param studentId  The unique identifier of the student.
+   * @param name       The name of the student.
+   * @param contact    The contact number of the student.
+   * @param enrollYear The enrollment year of the student.
+   * @param email      The email address of the student.
+   */
 
   // Constructor
-  public Student(String studentId, String name, String bloodGroup, LocalDate dob, String mobileNumber, String email, String program, String gender, String semester) {
+  public Student(String studentId, String name, String contact, Date enrollYear, String email) {
     this.studentId = studentId;
     this.name = name;
-    this.bloodGroup = bloodGroup;
-    this.dob = dob;
-    this.mobileNumber = mobileNumber;
     this.email = email;
-    this.program = program;
-    this.gender = gender;
-    this.semester = semester;
+    this.contact = contact;
+    this.enrollYear = enrollYear;
   }
 
   // Getters
@@ -35,32 +43,16 @@ public class Student {
     return name;
   }
 
-  public String getBloodGroup() {
-    return bloodGroup;
-  }
-
-  public LocalDate getDob() {
-    return dob;
-  }
-
-  public String getMobileNumber() {
-    return mobileNumber;
-  }
-
   public String getEmail() {
     return email;
   }
 
-  public String getProgram() {
-    return program;
+  public String getContact() { 
+    return contact;
   }
-
-  public String getGender() {
-    return gender;
-  }
-
-  public String getSemester() {
-    return semester;
+  
+  public Date getEnrollYear() { 
+    return enrollYear;
   }
 
   // Setters
@@ -72,58 +64,45 @@ public class Student {
     this.name = name;
   }
 
-  public void setBloodGroup(String bloodGroup) {
-    this.bloodGroup = bloodGroup;
-  }
-
-  public void setDob(LocalDate dob) {
-    this.dob = dob;
-  }
-
-  public void setMobileNumber(String mobileNumber) {
-    this.mobileNumber = mobileNumber;
-  }
-
   public void setEmail(String email) {
     this.email = email;
   }
 
-  public void setProgram(String program) {
-    this.program = program;
+  public void setContact(String contact) {
+    this.contact = contact;
   }
 
-  public void setGender(String gender) {
-    this.gender = gender;
-  }
-
-  public void setSemester(String semester) {
-    this.semester = semester;
+  public void setEnrollYear(Date enrollYear) {
+    this.enrollYear = enrollYear;
   }
 
   // Override toString method for pretty print
+  /**
+   * Returns a string representation of the student.
+   *
+   * @return A string containing student details in a human-readable format.
+   */
   @Override
   public String toString() {
-    return "Student{" +
-        "studentId='" + studentId + '\'' +
-        ", name='" + name + '\'' +
-        ", bloodGroup='" + bloodGroup + '\'' +
-        ", dob=" + dob +
-        ", mobileNumber='" + mobileNumber + '\'' +
-        ", email='" + email + '\'' +
-        ", program='" + program + '\'' +
-        ", gender='" + gender + '\'' +
-        ", semester='" + semester + '\'' +
+    return "Student{" 
+        +
+        "studentId='" + studentId + '\'' 
+        +
+        ", name='" + name + '\'' 
+        +
+        ", erollYear=" + enrollYear 
+        +
+        ", contact='" + contact + '\'' 
+        +
+        ", email='" + email + '\'' 
+        +
         '}';
   }
 }
 // CREATE TABLE Students (
 //     studentId VARCHAR(255),
 //     name VARCHAR(255),
-//     bloodGroup VARCHAR(3),
-//     dob DATE,
-//     mobileNumber VARCHAR(15),
+//     enrollYear DATE,
 //     email VARCHAR(255),
-//     program VARCHAR(255),
-//     gender CHAR(1),
-//     semester VARCHAR(255)
+//     contact VARCHAR(100)
 // );
