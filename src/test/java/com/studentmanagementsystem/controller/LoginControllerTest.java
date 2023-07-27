@@ -2,7 +2,7 @@ package test.java.com.studentmanagementsystem.controller;
 
 import main.java.com.studentmanagementsystem.controller.LoginController;
 import main.java.com.studentmanagementsystem.model.Student;
-import main.java.com.studentmanagementsystem.model.Teacher;
+import main.java.com.studentmanagementsystem.model.Faculty;
 import main.java.com.studentmanagementsystem.model.Admin;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,7 +30,7 @@ public class LoginControllerTest {
   public void testValidateTeacherLogin() {
     String email = "test2@test.com";
     String password = "password";
-    Teacher teacher = loginController.validateTeacherLogin(email, password);
+    Faculty teacher = loginController.validateTeacherLogin(email, password);
 
     assertNotNull(teacher, "Expected a teacher object, but got null");
     assertEquals(email, teacher.getEmail(), "Expected email to match, but it did not");

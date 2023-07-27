@@ -2,7 +2,7 @@ package test.java.com.studentmanagementsystem.model;
 
 import main.java.com.studentmanagementsystem.model.Course;
 import main.java.com.studentmanagementsystem.model.Student;
-import main.java.com.studentmanagementsystem.model.Teacher;
+import main.java.com.studentmanagementsystem.model.Faculty;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,12 +12,12 @@ import java.util.List;
 
 public class CourseTest {
   private Course course;
-  private Teacher teacher;
+  private Faculty teacher;
   private List<Student> students;
 
   @Before
   public void setUp() {
-    teacher = new Teacher("T001", "John Doe", "A+", "1980-01-01", "9876543210",
+    teacher = new Faculty("T001", "John Doe", "A+", "1980-01-01", "9876543210",
         "john@sm.com", "PhD", "Male", "Section A", 50000, 5000, 60000);
     students = Arrays.asList(
         new Student("S001", "Alice", "A+", "1998-12-12", "1234567890", "alice@sm.com", "BSc", "Female", "Fall 2022-2023"),

@@ -1,7 +1,7 @@
 package main.java.com.studentmanagementsystem.controller;
 
 import main.java.com.studentmanagementsystem.model.Admin;
-import main.java.com.studentmanagementsystem.model.Teacher;
+import main.java.com.studentmanagementsystem.model.Faculty;
 import main.java.com.studentmanagementsystem.model.Student;
 import main.java.com.studentmanagementsystem.model.Course;
 import main.java.com.studentmanagementsystem.util.DatabaseHelper;
@@ -33,12 +33,12 @@ public class AdminController {
     return admin;
   }
 
-  public List<Teacher> getAllTeachers() {
-    List<Teacher> teachers = new ArrayList<>();
+  public List<Faculty> getAllTeachers() {
+    List<Faculty> teachers = new ArrayList<>();
     try {
       ResultSet resultSet = dbHelper.executeQuery("SELECT * FROM Teachers;");
       while (resultSet.next()) {
-        Teacher teacher = new Teacher(resultSet.getString("TeacherID"), resultSet.getString("Name"), resultSet.getString("BloodGroup"),
+        Faculty teacher = new Faculty(resultSet.getString("TeacherID"), resultSet.getString("Name"), resultSet.getString("BloodGroup"),
             resultSet.getDate("DateOfBirth"), resultSet.getString("MobileNumber"), resultSet.getString("Email"),
             resultSet.getString("Degrees"), resultSet.getString("Gender"), resultSet.getString("Sections"),
             resultSet.getDouble("Payscale"), resultSet.getDouble("BonusAmount"), resultSet.getDouble("Salary"));
@@ -82,7 +82,7 @@ public class AdminController {
     return courses;
   }
 
-  public void addTeacher(Teacher teacher) {
+  public void addTeacher(Faculty teacher) {
     String query = String.format("INSERT INTO Teachers VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%f', '%f', '%f');",
         teacher.getTeacherId(), teacher.getName(), teacher.getBloodGroup(), teacher.getDateOfBirth(),
         teacher.getMobileNumber(), teacher.getEmail(), teacher.getDegrees(), teacher.getGender(),

@@ -1,7 +1,7 @@
 package main.java.com.studentmanagementsystem.view;
 
 import main.java.com.studentmanagementsystem.controller.AdminController;
-import main.java.com.studentmanagementsystem.model.Teacher;
+import main.java.com.studentmanagementsystem.model.Faculty;
 import main.java.com.studentmanagementsystem.model.Student;
 import main.java.com.studentmanagementsystem.model.Course;
 
@@ -55,7 +55,7 @@ public class AdminPanelPage {
     viewTeachersButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        List<Teacher> teachers = adminController.getAllTeachers();
+        List<Faculty> teachers = adminController.getAllTeachers();
         textArea.setText(teachers.toString());
       }
     });
