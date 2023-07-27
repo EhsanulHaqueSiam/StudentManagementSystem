@@ -2,7 +2,7 @@ package test.java.com.studentmanagementsystem.controller;
 
 import main.java.com.studentmanagementsystem.controller.AdminController;
 import main.java.com.studentmanagementsystem.model.Admin;
-import main.java.com.studentmanagementsystem.model.Teacher;
+import main.java.com.studentmanagementsystem.model.Faculty;
 import main.java.com.studentmanagementsystem.model.Student;
 import main.java.com.studentmanagementsystem.model.Course;
 
@@ -44,7 +44,7 @@ public class AdminControllerTest {
   // You might want to create a separate testing database, or use mocking techniques to simulate the database.
   @Test
   public void testAddAndDeleteTeacher() {
-    Teacher teacher = new Teacher("T123", "John Doe", "A+", "1970-01-01", "1234567890", "jdoe@sm.com",
+    Faculty teacher = new Faculty("T123", "John Doe", "A+", "1970-01-01", "1234567890", "jdoe@sm.com",
         "BSc, MSc", "Male", "CSE101, CSE102", 50000.0, 5000.0, 60000.0);
     adminController.addTeacher(teacher);
     Assert.assertNotNull(adminController.getAllTeachers().stream().filter(t -> t.getTeacherId().equals("T123")).findFirst().orElse(null));

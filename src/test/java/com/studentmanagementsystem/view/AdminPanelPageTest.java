@@ -1,7 +1,7 @@
 package test.java.com.studentmanagementsystem.view;
 
 import main.java.com.studentmanagementsystem.controller.AdminController;
-import main.java.com.studentmanagementsystem.model.Teacher;
+import main.java.com.studentmanagementsystem.model.Faculty;
 import main.java.com.studentmanagementsystem.model.Student;
 import main.java.com.studentmanagementsystem.model.Course;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,7 +30,7 @@ public class AdminPanelPageTest {
   @Test
   public void testViewTeachersButtonAction() {
     // Create mock Teacher list and set up the controller to return it
-    List<Teacher> mockTeachers = Arrays.asList(Mockito.mock(Teacher.class), Mockito.mock(Teacher.class));
+    List<Faculty> mockTeachers = Arrays.asList(Mockito.mock(Faculty.class), Mockito.mock(Faculty.class));
     when(mockAdminController.getAllTeachers()).thenReturn(mockTeachers);
 
     // Simulate clicking the View All Teachers button

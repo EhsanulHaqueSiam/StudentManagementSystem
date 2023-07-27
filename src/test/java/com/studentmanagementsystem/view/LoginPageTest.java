@@ -3,7 +3,7 @@ package test.java.com.studentmanagementsystem.view;
 import main.java.com.studentmanagementsystem.controller.LoginController;
 import main.java.com.studentmanagementsystem.model.Admin;
 import main.java.com.studentmanagementsystem.model.Student;
-import main.java.com.studentmanagementsystem.model.Teacher;
+import main.java.com.studentmanagementsystem.model.Faculty;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

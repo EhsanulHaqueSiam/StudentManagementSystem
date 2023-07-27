@@ -1,7 +1,7 @@
 package main.java.com.studentmanagementsystem.controller;
 
 import main.java.com.studentmanagementsystem.model.Student;
-import main.java.com.studentmanagementsystem.model.Teacher;
+import main.java.com.studentmanagementsystem.model.Faculty;
 import main.java.com.studentmanagementsystem.model.Admin;
 import main.java.com.studentmanagementsystem.util.DatabaseHelper;
 
@@ -39,8 +39,8 @@ public class LoginController {
     return student;
   }
 
-  public Teacher validateTeacherLogin(String email, String password) {
-    Teacher teacher = null;
+  public Faculty validateTeacherLogin(String email, String password) {
+    Faculty teacher = null;
 
     String query = "SELECT * FROM teachers WHERE email = ? AND password = ?";
     try (Connection conn = dbHelper.getConnection();
@@ -51,7 +51,7 @@ public class LoginController {
       ResultSet rs = stmt.executeQuery();
 
       if (rs.next()) {
-        teacher = new Teacher(/* fill in necessary parameters from the ResultSet*/);
+        teacher = new Faculty(/* fill in necessary parameters from the ResultSet*/);
       }
     } catch (SQLException e) {
       e.printStackTrace();
