@@ -1,84 +1,49 @@
 package main.java.com.studentmanagementsystem.controller;
 
+import main.java.com.studentmanagementsystem.data.StudentDAO;
+import main.java.com.studentmanagementsystem.data.StudentDAOImpl;
 import main.java.com.studentmanagementsystem.model.Student;
-import main.java.com.studentmanagementsystem.util.DatabaseHelper;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class StudentController {
-  private DatabaseHelper dbHelper;
+
+  private final StudentDAO studentDAO;
 
   public StudentController() {
-    dbHelper = DatabaseHelper.getInstance();
+    this.studentDAO = new StudentDAOImpl(); // Instantiate the StudentDAO implementation
   }
 
-  public Student getStudent(int studentId) {
-    Student student = null;
-
-    String query = "SELECT * FROM students WHERE studentId = ?";
-    try (Connection conn = dbHelper.getConnection();
-        PreparedStatement stmt = conn.prepareStatement(query)) {
-      stmt.setInt(1, studentId);
-      ResultSet rs = stmt.executeQuery();
-
-      if (rs.next()) {
-        student = new Student(rs.getInt("studentId"), rs.getString("name"), rs.getString("bloodGroup"),
-            rs.getString("dateOfBirth"), rs.getString("mobileNumber"), rs.getString("email"), rs.getString("program"),
-            rs.getString("gender"), rs.getString("semester"));
-      }
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-    return student;
-  }
-
+  // Method to add a new student
   public void addStudent(Student student) {
-    String query = "INSERT INTO students (name, bloodGroup, dateOfBirth, mobileNumber, email, program, gender, semester) " +
-        "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-
-    try (Connection conn = dbHelper.getConnection();
-        PreparedStatement stmt = conn.prepareStatement(query)) {
-
-      stmt.setString(1, student.getName());
-      stmt.setString(2, student.getBloodGroup());
-      stmt.setString(3, student.getDateOfBirth());
-      stmt.setString(4, student.getMobileNumber());
-      stmt.setString(5, student.getEmail());
-      stmt.setString(6, student.getProgram());
-      stmt.setString(7, student.getGender());
-      stmt.setString(8, student.getSemester());
-
-      stmt.executeUpdate();
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+    // Add any validation or business logic here, if needed
+    studentDAO.addStudent(student);
   }
 
+  // Method to update an existing student
   public void updateStudent(Student student) {
-    String query = "UPDATE students SET name = ?, bloodGroup = ?, dateOfBirth = ?, mobileNumber = ?, " +
-        "email = ?, program = ?, gender = ?, semester = ? WHERE studentId = ?";
-
-    try (Connection conn = dbHelper.getConnection();
-        PreparedStatement stmt = conn.prepareStatement(query)) {
-
-      stmt.setString(1, student.getName());
-      stmt.setString(2, student.getBloodGroup());
-      stmt.setString(3, student.getDateOfBirth());
-      stmt.setString(4, student.getMobileNumber());
-      stmt.setString(5, student.getEmail());
-      stmt.setString(6, student.getProgram());
-      stmt.setString(7, student.getGender());
-      stmt.setString(8, student.getSemester());
-      stmt.setInt(9, student.getStudentId());
-
-      stmt.executeUpdate();
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+    // Add any validation or business logic here, if needed
+    studentDAO.updateStudent(student);
   }
+
+  // Method to delete a student by their ID
+  public void deleteStudent(int studentId) {
+    // Add any validation or business logic here, if needed
+    studentDAO.deleteStudent(studentId);
+  }
+
+  // Method to get a student by their ID
+  public Student getStudentById(int studentId) {
+    // Add any validation or business logic here, if needed
+    return studentDAO.getStudentById(studentId);
+  }
+
+  // Method to get all students
+  public List<Student> getAllStudents() {
+    // Add any validation or business logic here, if needed
+    return studentDAO.getAllStudents();
+  }
+
+  // Add other methods as needed for specific functionality related to student management
+  // For example, methods to handle enrollment, grades, etc.
 }

@@ -27,7 +27,7 @@ public class Classes {
     this.time = time;
   }
 
-  //Defalut Constructor
+  //Default Constructor
   public Classes() {
   }
 
