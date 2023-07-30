@@ -55,3 +55,7 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+### Database config file ###
+src\main\resources\config.properties
+src\test\resources\testConfig.properties
