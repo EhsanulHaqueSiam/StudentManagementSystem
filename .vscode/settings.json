@@ -1,4 +1,9 @@
 {
+    "java.project.sourcePaths": ["src"],
+    "java.project.outputPath": "bin",
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar"
+    ],
     "java.checkstyle.configuration": "/google_checks.xml",
     "java.checkstyle.version": "10.12.0"
 }
