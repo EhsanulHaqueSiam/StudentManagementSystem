@@ -57,8 +57,4 @@ bin/
 .DS_Store
 
 ### Database config file ###
-src\main\resources\config.properties
-src\test\resources\testConfig.properties
-src/main/resources/config.properties
-*.properties
 *.properties
