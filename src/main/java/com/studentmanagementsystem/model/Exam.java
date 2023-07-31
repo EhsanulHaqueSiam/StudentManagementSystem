@@ -12,7 +12,7 @@ public class Exam {
   private int totalMark;
   private String examType;
   private String examLocation;
-  
+
   /**
    * Creates a new exam with the specified details.
    *

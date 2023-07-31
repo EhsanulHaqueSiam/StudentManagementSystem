@@ -20,9 +20,9 @@ public class AuthoritiesDAOImpl implements AuthoritiesDAO {
     try {
       connection = DatabaseHelper.getInstance().getConnection();
       preparedStatement = connection.prepareStatement(AuthoritiesQueryConstants.INSERT_AUTHORITY);
-      preparedStatement.setString(1, authority.getAuthorityName());
-      preparedStatement.setString(2, authority.getAuthorityRole());
-      preparedStatement.setString(3, authority.getAuthorityMail());
+      preparedStatement.setString(1, authority.getAuthorityMail());
+      preparedStatement.setString(2, authority.getAuthorityName());
+      preparedStatement.setString(3, authority.getAuthorityRole());
       preparedStatement.setString(4, authority.getAuthorityContact());
       preparedStatement.executeUpdate();
     } catch (SQLException e) {
@@ -41,10 +41,10 @@ public class AuthoritiesDAOImpl implements AuthoritiesDAO {
     try {
       connection = DatabaseHelper.getInstance().getConnection();
       preparedStatement = connection.prepareStatement(AuthoritiesQueryConstants.UPDATE_AUTHORITY);
-      preparedStatement.setString(1, authority.getAuthorityRole());
-      preparedStatement.setString(2, authority.getAuthorityMail());
+      preparedStatement.setString(1, authority.getAuthorityName());
+      preparedStatement.setString(2, authority.getAuthorityRole());
       preparedStatement.setString(3, authority.getAuthorityContact());
-      preparedStatement.setString(4, authority.getAuthorityName());
+      preparedStatement.setString(4, authority.getAuthorityMail());
       preparedStatement.executeUpdate();
     } catch (SQLException e) {
       e.printStackTrace();
@@ -55,14 +55,14 @@ public class AuthoritiesDAOImpl implements AuthoritiesDAO {
   }
 
   @Override
-  public void deleteAuthority(String authorityName) {
+  public void deleteAuthority(String authorityMail) {
     Connection connection = null;
     PreparedStatement preparedStatement = null;
 
     try {
       connection = DatabaseHelper.getInstance().getConnection();
       preparedStatement = connection.prepareStatement(AuthoritiesQueryConstants.DELETE_AUTHORITY);
-      preparedStatement.setString(1, authorityName);
+      preparedStatement.setString(1, authorityMail);
       preparedStatement.executeUpdate();
     } catch (SQLException e) {
       e.printStackTrace();
@@ -87,9 +87,9 @@ public class AuthoritiesDAOImpl implements AuthoritiesDAO {
       resultSet = preparedStatement.executeQuery();
 
       if (resultSet.next()) {
-        String roleName = resultSet.getString("authorityRole");
-        String email = resultSet.getString("authorityMail");
-        String contact = resultSet.getString("authorityContact");
+        String roleName = resultSet.getString("A_role");
+        String email = resultSet.getString("A_mail");
+        String contact = resultSet.getString("A_contact");
 
         authority = new Authorities(authorityName, roleName, email, contact);
       }

@@ -58,3 +58,4 @@ bin/
 
 ### Database config file ###
 *.properties
+src/main/resources/config.properties
