@@ -19,6 +19,10 @@
 *.tar.gz
 *.rar
 
+# Database config file
+*.properties
+src/main/resources/config.properties
+
 # Include Library files
 !lib/*
 
@@ -55,7 +59,3 @@ bin/
 
 ### Mac OS ###
 .DS_Store
-
-# Database config file
-*.properties
-src/main/resources/config.properties
