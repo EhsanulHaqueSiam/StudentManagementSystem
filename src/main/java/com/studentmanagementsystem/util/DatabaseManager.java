@@ -98,6 +98,7 @@ public class DatabaseManager {
           connection.close();
         }
       } catch (SQLException e) {
+        // Handle or log the exception, don't just print the stack trace.
         e.printStackTrace();
       }
     }

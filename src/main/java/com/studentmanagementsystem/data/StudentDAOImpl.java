@@ -1,20 +1,19 @@
 package main.java.com.studentmanagementsystem.data;
 
-import java.util.Date;
-import main.java.com.studentmanagementsystem.model.Student;
-import main.java.com.studentmanagementsystem.util.DatabaseManager;
-import main.java.com.studentmanagementsystem.data.query.StudentQueryConstants;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import main.java.com.studentmanagementsystem.data.query.StudentQueryConstants;
+import main.java.com.studentmanagementsystem.model.Student;
+import main.java.com.studentmanagementsystem.util.DatabaseManager;
 
 public class StudentDAOImpl implements StudentDAO {
 
-  private DatabaseManager databaseManager;
+  private final DatabaseManager databaseManager;
 
   public StudentDAOImpl() {
     databaseManager = DatabaseManager.getInstance();
@@ -23,9 +22,10 @@ public class StudentDAOImpl implements StudentDAO {
   @Override
   public void addStudent(Student student) {
     Connection connection = null;
+    PreparedStatement preparedStatement = null;
     try {
       connection = databaseManager.getConnection();
-      PreparedStatement preparedStatement = connection.prepareStatement(StudentQueryConstants.INSERT_STUDENT);
+      preparedStatement = connection.prepareStatement(StudentQueryConstants.INSERT_STUDENT);
 
       preparedStatement.setInt(1, student.getStudentId());
       preparedStatement.setString(2, student.getName());
@@ -35,22 +35,20 @@ public class StudentDAOImpl implements StudentDAO {
       preparedStatement.executeUpdate();
 
     } catch (SQLException e) {
-      // Handle or log the exception, don't just print the stack trace.
       e.printStackTrace();
     } finally {
-      if (connection != null) {
-        databaseManager.releaseConnection(connection);
-      }
+      DatabaseManager.getInstance().closeResources(null, preparedStatement);
+      databaseManager.releaseConnection(connection);
     }
   }
-
 
   @Override
   public void updateStudent(Student student) {
     Connection connection = null;
+    PreparedStatement preparedStatement = null;
     try {
       connection = databaseManager.getConnection();
-      PreparedStatement preparedStatement = connection.prepareStatement(StudentQueryConstants.UPDATE_STUDENT);
+      preparedStatement = connection.prepareStatement(StudentQueryConstants.UPDATE_STUDENT);
 
       preparedStatement.setString(1, student.getName());
       preparedStatement.setString(2, student.getEmail());
@@ -60,9 +58,9 @@ public class StudentDAOImpl implements StudentDAO {
       preparedStatement.executeUpdate();
 
     } catch (SQLException e) {
-      // Handle or log the exception, don't just print the stack trace.
       e.printStackTrace();
     } finally {
+      DatabaseManager.getInstance().closeResources(null, preparedStatement);
       databaseManager.releaseConnection(connection);
     }
   }
@@ -70,17 +68,18 @@ public class StudentDAOImpl implements StudentDAO {
   @Override
   public void deleteStudent(int id) {
     Connection connection = null;
+    PreparedStatement preparedStatement = null;
     try {
       connection = databaseManager.getConnection();
-      PreparedStatement preparedStatement = connection.prepareStatement(StudentQueryConstants.DELETE_STUDENT);
+      preparedStatement = connection.prepareStatement(StudentQueryConstants.DELETE_STUDENT);
 
       preparedStatement.setInt(1, id);
       preparedStatement.executeUpdate();
 
     } catch (SQLException e) {
-      // Handle or log the exception, don't just print the stack trace.
       e.printStackTrace();
     } finally {
+      DatabaseManager.getInstance().closeResources(null, preparedStatement);
       databaseManager.releaseConnection(connection);
     }
   }
@@ -89,23 +88,24 @@ public class StudentDAOImpl implements StudentDAO {
   public Student getStudentById(int id) {
     Student student = null;
     Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet resultSet = null;
     try {
       connection = databaseManager.getConnection();
-      PreparedStatement preparedStatement = connection.prepareStatement(StudentQueryConstants.GET_STUDENT_BY_ID);
+      preparedStatement = connection.prepareStatement(StudentQueryConstants.GET_STUDENT_BY_ID);
 
       preparedStatement.setInt(1, id);
-      try (ResultSet resultSet = preparedStatement.executeQuery()) {
-        if (resultSet.next()) {
-          student = extractStudentFromResultSet(resultSet);
-        }
+      resultSet = preparedStatement.executeQuery();
+
+      if (resultSet.next()) {
+        student = extractStudentFromResultSet(resultSet);
       }
     } catch (SQLException e) {
-      // Handle or log the exception, don't just print the stack trace.
       e.printStackTrace();
     } finally {
+      DatabaseManager.getInstance().closeResources(resultSet, preparedStatement);
       databaseManager.releaseConnection(connection);
     }
-
     return student;
   }
 
@@ -113,23 +113,23 @@ public class StudentDAOImpl implements StudentDAO {
   public List<Student> getAllStudents() {
     List<Student> students = new ArrayList<>();
     Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet resultSet = null;
     try {
       connection = databaseManager.getConnection();
-      PreparedStatement preparedStatement = connection.prepareStatement(StudentQueryConstants.GET_ALL_STUDENTS);
+      preparedStatement = connection.prepareStatement(StudentQueryConstants.GET_ALL_STUDENTS);
+      resultSet = preparedStatement.executeQuery();
 
-      try (ResultSet resultSet = preparedStatement.executeQuery()) {
-        while (resultSet.next()) {
-          Student student = extractStudentFromResultSet(resultSet);
-          students.add(student);
-        }
+      while (resultSet.next()) {
+        Student student = extractStudentFromResultSet(resultSet);
+        students.add(student);
       }
     } catch (SQLException e) {
-      // Handle or log the exception, don't just print the stack trace.
       e.printStackTrace();
     } finally {
+      DatabaseManager.getInstance().closeResources(resultSet, preparedStatement);
       databaseManager.releaseConnection(connection);
     }
-
     return students;
   }
 
@@ -144,3 +144,5 @@ public class StudentDAOImpl implements StudentDAO {
     return new Student(studentId, name, contact, email, enrollYear);
   }
 }
+
+

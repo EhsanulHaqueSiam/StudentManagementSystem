@@ -1,12 +1,11 @@
 package main.java.com.studentmanagementsystem.view;
 
-import main.java.com.studentmanagementsystem.model.Student;
-
 import java.util.List;
 import java.util.Scanner;
+import main.java.com.studentmanagementsystem.model.Student;
 
 public class StudentView {
-  private Scanner scanner;
+  private final Scanner scanner;
 
   public StudentView() {
     scanner = new Scanner(System.in);
