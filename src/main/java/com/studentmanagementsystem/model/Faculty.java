@@ -5,50 +5,40 @@ package main.java.com.studentmanagementsystem.model;
  * Each faculty member has a unique identifier, a name, a contact number,
  * and an email address.
  */
-
 public class Faculty {
-  private String facultyId;
+  private int facultyId;
   private String name;
   private String contact;
   private String email;
 
-  /**
-   * Creates a new faculty member with the specified details.
-   *
-   * @param facultyId The unique identifier of the faculty member.
-   * @param name      The name of the faculty member.
-   * @param contact   The contact number of the faculty member.
-   * @param email     The email address of the faculty member.
-   */
 
-  // Constructor
-  public Faculty(String facultyId, String name, String contact, String email) {
+  public Faculty(int facultyId, String name, String contact, String email) {
     this.facultyId = facultyId;
     this.name = name;
     this.contact = contact;
     this.email = email;
   }
 
-  // Getters
-  public String getfacultyId() {
-    return facultyId;
+  public Faculty() {
+  }
+
+  public int getFacultyId() {
+    return this.facultyId;
   }
 
   public String getName() {
-    return name;
+    return this.name;
   }
 
-  public String getcontact() {
-    return contact;
+  public String getContact() {
+    return this.contact;
   }
 
   public String getEmail() {
-    return email;
+    return this.email;
   }
 
-
-  // Setters
-  public void setfacultyId(String facultyId) {
+  public void setFacultyId(int facultyId) {
     this.facultyId = facultyId;
   }
 
@@ -56,7 +46,7 @@ public class Faculty {
     this.name = name;
   }
 
-  public void setcontact(String contact) {
+  public void setContact(String contact) {
     this.contact = contact;
   }
 
@@ -64,19 +54,8 @@ public class Faculty {
     this.email = email;
   }
 
-  // Override toString method for pretty print
-  @Override
   public String toString() {
-    return "Faculty{" 
-        +
-        "facultyId='" + facultyId + '\'' 
-        +
-        ", name='" + name + '\'' 
-        +
-        ", contact='" + contact + '\'' 
-        +
-        ", email='" + email + '\'' 
-        +
-        '}';
+    return "Faculty(facultyId=" + this.getFacultyId() + ", name=" + this.getName() + ", contact="
+        + this.getContact() + ", email=" + this.getEmail() + ")";
   }
 }

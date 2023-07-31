@@ -8,27 +8,26 @@ import java.util.Date;
  */
 public class Exam {
 
+  private int examID;
   private Date examDate;
   private int totalMark;
   private String examType;
-  private String examLocation;
+  private String examRoomNo;
 
-  /**
-   * Creates a new exam with the specified details.
-   *
-   * @param examDate     The date of the exam.
-   * @param totalMark    The total mark of the exam.
-   * @param examType     The type of the exam.
-   * @param examLocation The location of the exam.
-   */
-  public Exam(Date examDate, int totalMark, String examType, String examLocation) {
+
+  public Exam(int examID, Date examDate, int totalMark, String examType, String examRoomNo) {
+    this.examID = examID;
     this.examDate = examDate;
     this.totalMark = totalMark;
     this.examType = examType;
-    this.examLocation = examLocation;
+    this.examRoomNo = examRoomNo;
   }
 
   public Exam() {
+  }
+
+  public int getExamID() {
+    return this.examID;
   }
 
   public Date getExamDate() {
@@ -43,8 +42,12 @@ public class Exam {
     return this.examType;
   }
 
-  public String getExamLocation() {
-    return this.examLocation;
+  public String getExamRoomNo() {
+    return this.examRoomNo;
+  }
+
+  public void setExamID(int examID) {
+    this.examID = examID;
   }
 
   public void setExamDate(Date examDate) {
@@ -59,12 +62,13 @@ public class Exam {
     this.examType = examType;
   }
 
-  public void setExamLocation(String examLocation) {
-    this.examLocation = examLocation;
+  public void setExamRoomNo(String examRoomNo) {
+    this.examRoomNo = examRoomNo;
   }
 
   public String toString() {
-    return "Exam(examDate=" + this.getExamDate() + ", totalMark=" + this.getTotalMark()
-        + ", examType=" + this.getExamType() + ", examLocation=" + this.getExamLocation() + ")";
+    return "Exam(examID=" + this.getExamID() + ", examDate=" + this.getExamDate() + ", totalMark="
+        + this.getTotalMark() + ", examType=" + this.getExamType() + ", examRoomNo="
+        + this.getExamRoomNo() + ")";
   }
 }

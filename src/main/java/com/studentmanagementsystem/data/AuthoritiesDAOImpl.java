@@ -1,8 +1,7 @@
 package main.java.com.studentmanagementsystem.data;
 
 import main.java.com.studentmanagementsystem.model.Authorities;
-import main.java.com.studentmanagementsystem.util.DatabaseHelper;
-import main.java.com.studentmanagementsystem.util.DatabaseUtil;
+import main.java.com.studentmanagementsystem.util.DatabaseManager;
 import main.java.com.studentmanagementsystem.data.query.AuthoritiesQueryConstants;
 
 import java.sql.Connection;
@@ -12,94 +11,84 @@ import java.sql.SQLException;
 
 public class AuthoritiesDAOImpl implements AuthoritiesDAO {
 
+  private DatabaseManager databaseManager;
+
+  public AuthoritiesDAOImpl() {
+    databaseManager = DatabaseManager.getInstance();
+  }
+
   @Override
   public void addAuthority(Authorities authority) {
-    Connection connection = null;
-    PreparedStatement preparedStatement = null;
+    try (Connection connection = databaseManager.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(AuthoritiesQueryConstants.INSERT_AUTHORITY)) {
 
-    try {
-      connection = DatabaseHelper.getInstance().getConnection();
-      preparedStatement = connection.prepareStatement(AuthoritiesQueryConstants.INSERT_AUTHORITY);
       preparedStatement.setString(1, authority.getAuthorityMail());
       preparedStatement.setString(2, authority.getAuthorityName());
       preparedStatement.setString(3, authority.getAuthorityRole());
       preparedStatement.setString(4, authority.getAuthorityContact());
       preparedStatement.executeUpdate();
+
     } catch (SQLException e) {
       e.printStackTrace();
-      // Handle the exception, log it, or rethrow as needed.
-    } finally {
-      DatabaseUtil.closeConnection(connection, preparedStatement, null);
     }
   }
 
   @Override
   public void updateAuthority(Authorities authority) {
-    Connection connection = null;
-    PreparedStatement preparedStatement = null;
+    try (Connection connection = databaseManager.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(AuthoritiesQueryConstants.UPDATE_AUTHORITY)) {
 
-    try {
-      connection = DatabaseHelper.getInstance().getConnection();
-      preparedStatement = connection.prepareStatement(AuthoritiesQueryConstants.UPDATE_AUTHORITY);
       preparedStatement.setString(1, authority.getAuthorityName());
       preparedStatement.setString(2, authority.getAuthorityRole());
       preparedStatement.setString(3, authority.getAuthorityContact());
       preparedStatement.setString(4, authority.getAuthorityMail());
       preparedStatement.executeUpdate();
+
     } catch (SQLException e) {
       e.printStackTrace();
-      // Handle the exception, log it, or rethrow as needed.
-    } finally {
-      DatabaseUtil.closeConnection(connection, preparedStatement, null);
     }
   }
 
   @Override
-  public void deleteAuthority(String authorityMail) {
-    Connection connection = null;
-    PreparedStatement preparedStatement = null;
+  public void deleteAuthority(String authorityName) {
+    try (Connection connection = databaseManager.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(AuthoritiesQueryConstants.DELETE_AUTHORITY)) {
 
-    try {
-      connection = DatabaseHelper.getInstance().getConnection();
-      preparedStatement = connection.prepareStatement(AuthoritiesQueryConstants.DELETE_AUTHORITY);
-      preparedStatement.setString(1, authorityMail);
+      preparedStatement.setString(1, authorityName);
       preparedStatement.executeUpdate();
+
     } catch (SQLException e) {
       e.printStackTrace();
-      // Handle the exception, log it, or rethrow as needed.
-    } finally {
-      DatabaseUtil.closeConnection(connection, preparedStatement, null);
     }
   }
 
   @Override
   public Authorities getAuthorityByName(String authorityName) {
-    Connection connection = null;
-    PreparedStatement preparedStatement = null;
-    ResultSet resultSet = null;
-
     Authorities authority = null;
 
-    try {
-      connection = DatabaseHelper.getInstance().getConnection();
-      preparedStatement = connection.prepareStatement(AuthoritiesQueryConstants.GET_AUTHORITY_BY_NAME);
+    try (Connection connection = databaseManager.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(AuthoritiesQueryConstants.GET_AUTHORITY_BY_MAIL)) {
+
       preparedStatement.setString(1, authorityName);
-      resultSet = preparedStatement.executeQuery();
 
-      if (resultSet.next()) {
-        String roleName = resultSet.getString("A_role");
-        String email = resultSet.getString("A_mail");
-        String contact = resultSet.getString("A_contact");
-
-        authority = new Authorities(authorityName, roleName, email, contact);
+      try (ResultSet resultSet = preparedStatement.executeQuery()) {
+        if (resultSet.next()) {
+          authority = extractAuthorityFromResultSet(resultSet);
+        }
       }
     } catch (SQLException e) {
       e.printStackTrace();
-      // Handle the exception, log it, or rethrow as needed.
-    } finally {
-      DatabaseUtil.closeConnection(connection, preparedStatement, resultSet);
     }
 
     return authority;
+  }
+
+  private Authorities extractAuthorityFromResultSet(ResultSet resultSet) throws SQLException {
+    String authorityName = resultSet.getString("A_name");
+    String authorityRole = resultSet.getString("A_role");
+    String authorityMail = resultSet.getString("A_mail");
+    String authorityContact = resultSet.getString("A_contact");
+
+    return new Authorities(authorityName, authorityRole, authorityMail, authorityContact);
   }
 }

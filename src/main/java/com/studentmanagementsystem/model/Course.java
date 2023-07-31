@@ -6,30 +6,23 @@ package main.java.com.studentmanagementsystem.model;
  */
 public class Course {
 
-  private String courseId;
+  private int courseId;
   private String courseName;
   private int courseCredits;
-  private int courseDuration;
+  private String courseDuration;
 
-  /**
-   * Creates a new course with the specified details.
-   *
-   * @param courseId       The unique identifier of the course.
-   * @param courseName     The name of the course.
-   * @param courseCredits  The number of credits associated with the course.
-   * @param courseDuration The duration of the course in weeks.
-   */
-  public Course(String courseId, String courseName, int courseCredits, int courseDuration) {
-    this.courseId = courseId;
-    this.courseName = courseName;
-    this.courseCredits = courseCredits;
-    this.courseDuration = courseDuration;
-  }
+
+public Course(int courseId, String courseName, int courseCredits, String courseDuration) {
+  this.courseId = courseId;
+  this.courseName = courseName;
+  this.courseCredits = courseCredits;
+  this.courseDuration = courseDuration;
+}
 
   public Course() {
   }
 
-  public String getCourseId() {
+  public int getCourseId() {
     return this.courseId;
   }
 
@@ -41,11 +34,11 @@ public class Course {
     return this.courseCredits;
   }
 
-  public int getCourseDuration() {
+  public String getCourseDuration() {
     return this.courseDuration;
   }
 
-  public void setCourseId(String courseId) {
+  public void setCourseId(int courseId) {
     this.courseId = courseId;
   }
 
@@ -57,11 +50,10 @@ public class Course {
     this.courseCredits = courseCredits;
   }
 
-  public void setCourseDuration(int courseDuration) {
+  public void setCourseDuration(String courseDuration) {
     this.courseDuration = courseDuration;
   }
 
-  @Override
   public String toString() {
     return "Course(courseId=" + this.getCourseId() + ", courseName=" + this.getCourseName()
         + ", courseCredits=" + this.getCourseCredits() + ", courseDuration="

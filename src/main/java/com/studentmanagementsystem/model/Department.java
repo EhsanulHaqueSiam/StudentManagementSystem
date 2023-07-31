@@ -6,27 +6,21 @@ package main.java.com.studentmanagementsystem.model;
  */
 public class Department {
 
-  private String deptId;
+  private int deptId;
   private String deptName;
   private String deptHead;
-  
-  /**
-   * Creates a new department with the specified details.
-   *
-   * @param deptId   The unique identifier of the department.
-   * @param deptName The name of the department.
-   * @param deptHead The head of the department.
-   */
-  public Department(String deptId, String deptName, String deptHead) {
-    this.deptId = deptId;
-    this.deptName = deptName;
-    this.deptHead = deptHead;
-  }
+
+
+public Department(int deptId, String deptName, String deptHead) {
+  this.deptId = deptId;
+  this.deptName = deptName;
+  this.deptHead = deptHead;
+}
 
   public Department() {
   }
 
-  public String getDeptId() {
+  public int getDeptId() {
     return this.deptId;
   }
 
@@ -38,7 +32,7 @@ public class Department {
     return this.deptHead;
   }
 
-  public void setDeptId(String deptId) {
+  public void setDeptId(int deptId) {
     this.deptId = deptId;
   }
 

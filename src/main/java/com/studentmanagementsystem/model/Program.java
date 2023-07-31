@@ -6,30 +6,23 @@ package main.java.com.studentmanagementsystem.model;
  */
 public class Program {
 
-  private String programId;
+  private int programId;
   private String programName;
-  private int programDuration;
+  private String programDuration;
   private String programType;
 
-  /**
-   * Creates a new program with the specified details.
-   *
-   * @param programId       The unique identifier of the program.
-   * @param programName     The name of the program.
-   * @param programDuration The duration of the program in months.
-   * @param programType     The type of the program (e.g., "Bachelor", "Master", etc.).
-   */
-  public Program(String programId, String programName, int programDuration, String programType) {
-    this.programId = programId;
-    this.programName = programName;
-    this.programDuration = programDuration;
-    this.programType = programType;
-  }
+
+public Program(int programId, String programName, String programDuration, String programType) {
+  this.programId = programId;
+  this.programName = programName;
+  this.programDuration = programDuration;
+  this.programType = programType;
+}
 
   public Program() {
   }
 
-  public String getProgramId() {
+  public int getProgramId() {
     return this.programId;
   }
 
@@ -37,7 +30,7 @@ public class Program {
     return this.programName;
   }
 
-  public int getProgramDuration() {
+  public String getProgramDuration() {
     return this.programDuration;
   }
 
@@ -45,7 +38,7 @@ public class Program {
     return this.programType;
   }
 
-  public void setProgramId(String programId) {
+  public void setProgramId(int programId) {
     this.programId = programId;
   }
 
@@ -53,7 +46,7 @@ public class Program {
     this.programName = programName;
   }
 
-  public void setProgramDuration(int programDuration) {
+  public void setProgramDuration(String programDuration) {
     this.programDuration = programDuration;
   }
 
@@ -61,12 +54,6 @@ public class Program {
     this.programType = programType;
   }
 
-  /**
-   * Returns a string representation of the program.
-   *
-   * @return A string containing program details.
-   */
-  @Override
   public String toString() {
     return "Program(programId=" + this.getProgramId() + ", programName=" + this.getProgramName()
         + ", programDuration=" + this.getProgramDuration() + ", programType="

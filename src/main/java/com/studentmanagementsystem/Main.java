@@ -3,13 +3,17 @@ package main.java.com.studentmanagementsystem;
 import java.sql.Connection;
 
 //import main.java.com.studentmanagementsystem.controller.LoginController;
-import main.java.com.studentmanagementsystem.util.DatabaseHelper;
+import java.sql.SQLException;
+import main.java.com.studentmanagementsystem.controller.StudentController;
+import main.java.com.studentmanagementsystem.util.DatabaseManager;
 
 public class Main {
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws SQLException {
 
-    Connection dbHelper = DatabaseHelper.getInstance().getConnection();
+    Connection dbHelper = DatabaseManager.getInstance().getConnection();
+    StudentController controller = new StudentController();
+    controller.run();
     // dbHelper.initialize();
 
     // Create a new login controller, which will in turn create the login view

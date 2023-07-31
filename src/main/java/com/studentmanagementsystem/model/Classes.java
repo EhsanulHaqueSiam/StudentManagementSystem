@@ -1,33 +1,22 @@
 package main.java.com.studentmanagementsystem.model;
 
-import java.time.LocalDateTime;
-
 /**
  * Represents a class in the student management system.
  * Each class has a class name, a location, and a date and time.
  */
-
 public class Classes {
 
   private String className;
-  private String classLocation;
-  private LocalDateTime time;
+  private String classRoomno;
+  private String classTime;
 
-  /**
-   * Creates a new class with the specified details.
-   *
-   * @param className     The name of the class.
-   * @param classLocation The location of the class.
-   * @param time          The date and time of the class.
-   */
-  //Parameterized Constructor
-  public Classes(String className, String classLocation, LocalDateTime time) {
-    this.className = className;
-    this.classLocation = classLocation;
-    this.time = time;
-  }
 
-  //Default Constructor
+public Classes(String className, String classRoomno, String classTime) {
+  this.className = className;
+  this.classRoomno = classRoomno;
+  this.classTime = classTime;
+}
+
   public Classes() {
   }
 
@@ -35,29 +24,28 @@ public class Classes {
     return this.className;
   }
 
-  public String getClassLocation() {
-    return this.classLocation;
+  public String getClassRoomno() {
+    return this.classRoomno;
   }
 
-  public LocalDateTime getTime() {
-    return this.time;
+  public String getClassTime() {
+    return this.classTime;
   }
 
   public void setClassName(String className) {
     this.className = className;
   }
 
-  public void setClassLocation(String classLocation) {
-    this.classLocation = classLocation;
+  public void setClassRoomno(String classRoomno) {
+    this.classRoomno = classRoomno;
   }
 
-  public void setTime(LocalDateTime time) {
-    this.time = time;
+  public void setClassTime(String classTime) {
+    this.classTime = classTime;
   }
 
-  @Override
   public String toString() {
-    return "Classes(className=" + this.getClassName() + ", classLocation=" + this.getClassLocation()
-        + ", time=" + this.getTime() + ")";
+    return "Classes(className=" + this.getClassName() + ", classRoomno=" + this.getClassRoomno()
+        + ", classTime=" + this.getClassTime() + ")";
   }
 }

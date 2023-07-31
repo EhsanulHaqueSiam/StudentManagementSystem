@@ -4,67 +4,58 @@ package main.java.com.studentmanagementsystem.model;
  * Represents a grade in the student management system.
  * Each grade has a grade identifier, a year, a semester, and a numeric grade value.
  */
-
 public class Grade {
 
-  private String gradeId;
-  private int year;
+  private int gradeId;
+  private String semesterYear;
   private String semester;
-  private Double grade;
+  private Double CGPA;
 
-  /**
-   * Creates a new grade with the specified details.
-   *
-   * @param gradeId  The unique identifier of the grade.
-   * @param year     The year associated with the grade.
-   * @param semester The semester associated with the grade.
-   * @param grade    The numeric value of the grade.
-   */
 
-  public Grade(String gradeId, int year, String semester, Double grade) {
-    this.gradeId = gradeId;
-    this.year = year;
-    this.semester = semester;
-    this.grade = grade;
-  }
+public Grade(int gradeId, String semesterYear, String semester, Double CGPA) {
+  this.gradeId = gradeId;
+  this.semesterYear = semesterYear;
+  this.semester = semester;
+  this.CGPA = CGPA;
+}
 
   public Grade() {
   }
 
-  public String getGradeId() {
+  public int getGradeId() {
     return this.gradeId;
   }
 
-  public int getYear() {
-    return this.year;
+  public String getSemesterYear() {
+    return this.semesterYear;
   }
 
   public String getSemester() {
     return this.semester;
   }
 
-  public Double getGrade() {
-    return this.grade;
+  public Double getCGPA() {
+    return this.CGPA;
   }
 
-  public void setGradeId(String gradeId) {
+  public void setGradeId(int gradeId) {
     this.gradeId = gradeId;
   }
 
-  public void setYear(int year) {
-    this.year = year;
+  public void setSemesterYear(String semesterYear) {
+    this.semesterYear = semesterYear;
   }
 
   public void setSemester(String semester) {
     this.semester = semester;
   }
 
-  public void setGrade(Double grade) {
-    this.grade = grade;
+  public void setCGPA(Double CGPA) {
+    this.CGPA = CGPA;
   }
 
   public String toString() {
-    return "Grade(gradeId=" + this.getGradeId() + ", year=" + this.getYear() + ", semester="
-        + this.getSemester() + ", grade=" + this.getGrade() + ")";
+    return "Grade(gradeId=" + this.getGradeId() + ", semesterYear=" + this.getSemesterYear()
+        + ", semester=" + this.getSemester() + ", CGPA=" + this.getCGPA() + ")";
   }
 }

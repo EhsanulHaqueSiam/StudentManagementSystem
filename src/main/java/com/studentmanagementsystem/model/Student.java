@@ -7,56 +7,47 @@ import java.util.Date;
  * Each student has a unique identifier, a name, a contact number,
  * an enrollment year, and an email address.
  */
-
 public class Student {
-  private String studentId;
+  // Getters
+  private int studentId;
   private String name;
   private String contact;
   private String email;
   private Date enrollYear;
 
-  /**
-   * Creates a new student with the specified details.
-   *
-   * @param studentId  The unique identifier of the student.
-   * @param name       The name of the student.
-   * @param contact    The contact number of the student.
-   * @param enrollYear The enrollment year of the student.
-   * @param email      The email address of the student.
-   */
 
-  // Constructor
-  public Student(String studentId, String name, String contact, Date enrollYear, String email) {
+  public Student(int studentId, String name, String contact, String email, Date enrollYear) {
     this.studentId = studentId;
     this.name = name;
-    this.email = email;
     this.contact = contact;
+    this.email = email;
     this.enrollYear = enrollYear;
   }
 
-  // Getters
-  public String getStudentId() {
-    return studentId;
+  public Student() {
+  }
+
+  public int getStudentId() {
+    return this.studentId;
   }
 
   public String getName() {
-    return name;
+    return this.name;
+  }
+
+  public String getContact() {
+    return this.contact;
   }
 
   public String getEmail() {
-    return email;
+    return this.email;
   }
 
-  public String getContact() { 
-    return contact;
-  }
-  
-  public Date getEnrollYear() { 
-    return enrollYear;
+  public Date getEnrollYear() {
+    return this.enrollYear;
   }
 
-  // Setters
-  public void setStudentId(String studentId) {
+  public void setStudentId(int studentId) {
     this.studentId = studentId;
   }
 
@@ -64,45 +55,22 @@ public class Student {
     this.name = name;
   }
 
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
   public void setContact(String contact) {
     this.contact = contact;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
   }
 
   public void setEnrollYear(Date enrollYear) {
     this.enrollYear = enrollYear;
   }
 
-  // Override toString method for pretty print
-  /**
-   * Returns a string representation of the student.
-   *
-   * @return A string containing student details in a human-readable format.
-   */
-  @Override
   public String toString() {
-    return "Student{" 
-        +
-        "studentId='" + studentId + '\'' 
-        +
-        ", name='" + name + '\'' 
-        +
-        ", erollYear=" + enrollYear 
-        +
-        ", contact='" + contact + '\'' 
-        +
-        ", email='" + email + '\'' 
-        +
-        '}';
+    return "Student(studentId=" + this.getStudentId() + ", name=" + this.getName() + ", contact="
+        + this.getContact() + ", email=" + this.getEmail() + ", enrollYear=" + this.getEnrollYear()
+        + ")";
   }
 }
-// CREATE TABLE Students (
-//     studentId VARCHAR(255),
-//     name VARCHAR(255),
-//     enrollYear DATE,
-//     email VARCHAR(255),
-//     contact VARCHAR(100)
-// );
+
