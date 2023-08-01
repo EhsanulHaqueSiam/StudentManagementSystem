@@ -21,8 +21,11 @@ public class CourseDAOImpl implements CourseDAO {
 
   @Override
   public void addCourse(Course course) {
-    try (Connection connection = databaseManager.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(CourseQueryConstants.INSERT_COURSE)) {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    try {
+      connection = databaseManager.getConnection();
+      preparedStatement = connection.prepareStatement(CourseQueryConstants.INSERT_COURSE);
 
       preparedStatement.setInt(1, course.getCourseId());
       preparedStatement.setString(2, course.getCourseName());
@@ -32,13 +35,19 @@ public class CourseDAOImpl implements CourseDAO {
 
     } catch (SQLException e) {
       e.printStackTrace();
+    } finally {
+      DatabaseManager.getInstance().closeResources(null, preparedStatement);
+      databaseManager.releaseConnection(connection);
     }
   }
 
   @Override
   public void updateCourse(Course course) {
-    try (Connection connection = databaseManager.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(CourseQueryConstants.UPDATE_COURSE)) {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    try {
+      connection = databaseManager.getConnection();
+      preparedStatement = connection.prepareStatement(CourseQueryConstants.UPDATE_COURSE);
 
       preparedStatement.setString(1, course.getCourseName());
       preparedStatement.setString(2, course.getCourseDuration());
@@ -48,38 +57,54 @@ public class CourseDAOImpl implements CourseDAO {
 
     } catch (SQLException e) {
       e.printStackTrace();
+    } finally {
+      DatabaseManager.getInstance().closeResources(null, preparedStatement);
+      databaseManager.releaseConnection(connection);
     }
   }
 
   @Override
   public void deleteCourse(String courseId) {
-    try (Connection connection = databaseManager.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(CourseQueryConstants.DELETE_COURSE)) {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    try {
+      connection = databaseManager.getConnection();
+      preparedStatement = connection.prepareStatement(CourseQueryConstants.DELETE_COURSE);
 
       preparedStatement.setString(1, courseId);
       preparedStatement.executeUpdate();
 
     } catch (SQLException e) {
       e.printStackTrace();
+    } finally {
+      DatabaseManager.getInstance().closeResources(null, preparedStatement);
+      databaseManager.releaseConnection(connection);
     }
   }
 
   @Override
   public Course getCourseById(String courseId) {
     Course course = null;
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet resultSet = null;
 
-    try (Connection connection = databaseManager.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(CourseQueryConstants.GET_COURSE_BY_ID)) {
+    try {
+      connection = databaseManager.getConnection();
+      preparedStatement = connection.prepareStatement(CourseQueryConstants.GET_COURSE_BY_ID);
 
       preparedStatement.setString(1, courseId);
 
-      try (ResultSet resultSet = preparedStatement.executeQuery()) {
-        if (resultSet.next()) {
-          course = extractCourseFromResultSet(resultSet);
-        }
+      resultSet = preparedStatement.executeQuery();
+
+      if (resultSet.next()) {
+        course = extractCourseFromResultSet(resultSet);
       }
     } catch (SQLException e) {
       e.printStackTrace();
+    } finally {
+      DatabaseManager.getInstance().closeResources(resultSet, preparedStatement);
+      databaseManager.releaseConnection(connection);
     }
 
     return course;
@@ -88,10 +113,14 @@ public class CourseDAOImpl implements CourseDAO {
   @Override
   public List<Course> getAllCourses() {
     List<Course> courses = new ArrayList<>();
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet resultSet = null;
 
-    try (Connection connection = databaseManager.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(CourseQueryConstants.GET_ALL_COURSES);
-        ResultSet resultSet = preparedStatement.executeQuery()) {
+    try {
+      connection = databaseManager.getConnection();
+      preparedStatement = connection.prepareStatement(CourseQueryConstants.GET_ALL_COURSES);
+      resultSet = preparedStatement.executeQuery();
 
       while (resultSet.next()) {
         Course course = extractCourseFromResultSet(resultSet);
@@ -99,6 +128,9 @@ public class CourseDAOImpl implements CourseDAO {
       }
     } catch (SQLException e) {
       e.printStackTrace();
+    } finally {
+      DatabaseManager.getInstance().closeResources(resultSet, preparedStatement);
+      databaseManager.releaseConnection(connection);
     }
 
     return courses;

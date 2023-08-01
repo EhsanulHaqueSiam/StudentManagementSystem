@@ -21,8 +21,11 @@ public class ProgramDAOImpl implements ProgramDAO {
 
   @Override
   public void addProgram(Program program) {
-    try (Connection connection = databaseManager.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(ProgramQueryConstants.INSERT_PROGRAM)) {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    try {
+      connection = databaseManager.getConnection();
+      preparedStatement = connection.prepareStatement(ProgramQueryConstants.INSERT_PROGRAM);
 
       preparedStatement.setInt(1, program.getProgramId());
       preparedStatement.setString(2, program.getProgramName());
@@ -32,13 +35,19 @@ public class ProgramDAOImpl implements ProgramDAO {
 
     } catch (SQLException e) {
       e.printStackTrace();
+    } finally {
+      DatabaseManager.getInstance().closeResources(null, preparedStatement);
+      databaseManager.releaseConnection(connection);
     }
   }
 
   @Override
   public void updateProgram(Program program) {
-    try (Connection connection = databaseManager.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(ProgramQueryConstants.UPDATE_PROGRAM)) {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    try {
+      connection = databaseManager.getConnection();
+      preparedStatement = connection.prepareStatement(ProgramQueryConstants.UPDATE_PROGRAM);
 
       preparedStatement.setString(1, program.getProgramName());
       preparedStatement.setString(2, program.getProgramDuration());
@@ -48,37 +57,53 @@ public class ProgramDAOImpl implements ProgramDAO {
 
     } catch (SQLException e) {
       e.printStackTrace();
+    } finally {
+      DatabaseManager.getInstance().closeResources(null, preparedStatement);
+      databaseManager.releaseConnection(connection);
     }
   }
 
   @Override
-  public void deleteProgram(String programId) {
-    try (Connection connection = databaseManager.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(ProgramQueryConstants.DELETE_PROGRAM)) {
+  public void deleteProgram(int programId) {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    try {
+      connection = databaseManager.getConnection();
+      preparedStatement = connection.prepareStatement(ProgramQueryConstants.DELETE_PROGRAM);
 
-      preparedStatement.setString(1, programId);
+      preparedStatement.setInt(1, programId);
       preparedStatement.executeUpdate();
 
     } catch (SQLException e) {
       e.printStackTrace();
+    } finally {
+      DatabaseManager.getInstance().closeResources(null, preparedStatement);
+      databaseManager.releaseConnection(connection);
     }
   }
 
   @Override
-  public Program getProgramById(String programId) {
+  public Program getProgramById(int programId) {
     Program program = null;
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet resultSet = null;
 
-    try (Connection connection = databaseManager.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(ProgramQueryConstants.GET_PROGRAM_BY_ID)) {
+    try {
+      connection = databaseManager.getConnection();
+      preparedStatement = connection.prepareStatement(ProgramQueryConstants.GET_PROGRAM_BY_ID);
 
-      preparedStatement.setString(1, programId);
-      try (ResultSet resultSet = preparedStatement.executeQuery()) {
-        if (resultSet.next()) {
-          program = extractProgramFromResultSet(resultSet);
-        }
+      preparedStatement.setInt(1, programId);
+      resultSet = preparedStatement.executeQuery();
+
+      if (resultSet.next()) {
+        program = extractProgramFromResultSet(resultSet);
       }
     } catch (SQLException e) {
       e.printStackTrace();
+    } finally {
+      DatabaseManager.getInstance().closeResources(resultSet, preparedStatement);
+      databaseManager.releaseConnection(connection);
     }
 
     return program;
@@ -87,10 +112,14 @@ public class ProgramDAOImpl implements ProgramDAO {
   @Override
   public List<Program> getAllPrograms() {
     List<Program> programs = new ArrayList<>();
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet resultSet = null;
 
-    try (Connection connection = databaseManager.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(ProgramQueryConstants.GET_ALL_PROGRAMS);
-        ResultSet resultSet = preparedStatement.executeQuery()) {
+    try {
+      connection = databaseManager.getConnection();
+      preparedStatement = connection.prepareStatement(ProgramQueryConstants.GET_ALL_PROGRAMS);
+      resultSet = preparedStatement.executeQuery();
 
       while (resultSet.next()) {
         Program program = extractProgramFromResultSet(resultSet);
@@ -98,6 +127,9 @@ public class ProgramDAOImpl implements ProgramDAO {
       }
     } catch (SQLException e) {
       e.printStackTrace();
+    } finally {
+      DatabaseManager.getInstance().closeResources(resultSet, preparedStatement);
+      databaseManager.releaseConnection(connection);
     }
 
     return programs;

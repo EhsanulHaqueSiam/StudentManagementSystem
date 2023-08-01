@@ -21,8 +21,11 @@ public class DepartmentDAOImpl implements DepartmentDAO {
 
   @Override
   public void addDepartment(Department department) {
-    try (Connection connection = databaseManager.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(DepartmentQueryConstants.INSERT_DEPARTMENT)) {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    try {
+      connection = databaseManager.getConnection();
+      preparedStatement = connection.prepareStatement(DepartmentQueryConstants.INSERT_DEPARTMENT);
 
       preparedStatement.setInt(1, department.getDeptId());
       preparedStatement.setString(2, department.getDeptName());
@@ -31,13 +34,19 @@ public class DepartmentDAOImpl implements DepartmentDAO {
 
     } catch (SQLException e) {
       e.printStackTrace();
+    } finally {
+      DatabaseManager.getInstance().closeResources(null, preparedStatement);
+      databaseManager.releaseConnection(connection);
     }
   }
 
   @Override
   public void updateDepartment(Department department) {
-    try (Connection connection = databaseManager.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(DepartmentQueryConstants.UPDATE_DEPARTMENT)) {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    try {
+      connection = databaseManager.getConnection();
+      preparedStatement = connection.prepareStatement(DepartmentQueryConstants.UPDATE_DEPARTMENT);
 
       preparedStatement.setString(1, department.getDeptName());
       preparedStatement.setString(2, department.getDeptHead());
@@ -46,38 +55,54 @@ public class DepartmentDAOImpl implements DepartmentDAO {
 
     } catch (SQLException e) {
       e.printStackTrace();
+    } finally {
+      DatabaseManager.getInstance().closeResources(null, preparedStatement);
+      databaseManager.releaseConnection(connection);
     }
   }
 
   @Override
   public void deleteDepartment(String deptId) {
-    try (Connection connection = databaseManager.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(DepartmentQueryConstants.DELETE_DEPARTMENT)) {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    try {
+      connection = databaseManager.getConnection();
+      preparedStatement = connection.prepareStatement(DepartmentQueryConstants.DELETE_DEPARTMENT);
 
       preparedStatement.setString(1, deptId);
       preparedStatement.executeUpdate();
 
     } catch (SQLException e) {
       e.printStackTrace();
+    } finally {
+      DatabaseManager.getInstance().closeResources(null, preparedStatement);
+      databaseManager.releaseConnection(connection);
     }
   }
 
   @Override
   public Department getDepartmentById(String deptId) {
     Department department = null;
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet resultSet = null;
 
-    try (Connection connection = databaseManager.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(DepartmentQueryConstants.GET_DEPARTMENT_BY_ID)) {
+    try {
+      connection = databaseManager.getConnection();
+      preparedStatement = connection.prepareStatement(DepartmentQueryConstants.GET_DEPARTMENT_BY_ID);
 
       preparedStatement.setString(1, deptId);
 
-      try (ResultSet resultSet = preparedStatement.executeQuery()) {
-        if (resultSet.next()) {
-          department = extractDepartmentFromResultSet(resultSet);
-        }
+      resultSet = preparedStatement.executeQuery();
+
+      if (resultSet.next()) {
+        department = extractDepartmentFromResultSet(resultSet);
       }
     } catch (SQLException e) {
       e.printStackTrace();
+    } finally {
+      DatabaseManager.getInstance().closeResources(resultSet, preparedStatement);
+      databaseManager.releaseConnection(connection);
     }
 
     return department;
@@ -86,10 +111,14 @@ public class DepartmentDAOImpl implements DepartmentDAO {
   @Override
   public List<Department> getAllDepartments() {
     List<Department> departments = new ArrayList<>();
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet resultSet = null;
 
-    try (Connection connection = databaseManager.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(DepartmentQueryConstants.GET_ALL_DEPARTMENTS);
-        ResultSet resultSet = preparedStatement.executeQuery()) {
+    try {
+      connection = databaseManager.getConnection();
+      preparedStatement = connection.prepareStatement(DepartmentQueryConstants.GET_ALL_DEPARTMENTS);
+      resultSet = preparedStatement.executeQuery();
 
       while (resultSet.next()) {
         Department department = extractDepartmentFromResultSet(resultSet);
@@ -97,6 +126,9 @@ public class DepartmentDAOImpl implements DepartmentDAO {
       }
     } catch (SQLException e) {
       e.printStackTrace();
+    } finally {
+      DatabaseManager.getInstance().closeResources(resultSet, preparedStatement);
+      databaseManager.releaseConnection(connection);
     }
 
     return departments;

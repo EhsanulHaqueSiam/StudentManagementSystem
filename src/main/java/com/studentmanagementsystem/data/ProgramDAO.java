@@ -10,9 +10,9 @@ public interface ProgramDAO {
 
   void updateProgram(Program program);
 
-  void deleteProgram(String programId);
+  void deleteProgram(int programId);
 
-  Program getProgramById(String programId);
+  Program getProgramById(int programId);
 
   List<Program> getAllPrograms();
 

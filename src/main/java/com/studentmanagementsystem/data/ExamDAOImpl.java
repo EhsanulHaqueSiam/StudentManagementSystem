@@ -22,8 +22,11 @@ public class ExamDAOImpl implements ExamDAO {
 
   @Override
   public void addExam(Exam exam) {
-    try (Connection connection = databaseManager.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(ExamQueryConstants.INSERT_EXAM)) {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    try {
+      connection = databaseManager.getConnection();
+      preparedStatement = connection.prepareStatement(ExamQueryConstants.INSERT_EXAM);
 
       preparedStatement.setInt(1, exam.getExamID());
       preparedStatement.setDate(2, new java.sql.Date(exam.getExamDate().getTime()));
@@ -33,13 +36,19 @@ public class ExamDAOImpl implements ExamDAO {
 
     } catch (SQLException e) {
       e.printStackTrace();
+    } finally {
+      DatabaseManager.getInstance().closeResources(null, preparedStatement);
+      databaseManager.releaseConnection(connection);
     }
   }
 
   @Override
   public void updateExam(Exam exam) {
-    try (Connection connection = databaseManager.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(ExamQueryConstants.UPDATE_EXAM)) {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    try {
+      connection = databaseManager.getConnection();
+      preparedStatement = connection.prepareStatement(ExamQueryConstants.UPDATE_EXAM);
 
       preparedStatement.setDate(1, new java.sql.Date(exam.getExamDate().getTime()));
       preparedStatement.setString(2, exam.getExamType());
@@ -49,13 +58,19 @@ public class ExamDAOImpl implements ExamDAO {
 
     } catch (SQLException e) {
       e.printStackTrace();
+    } finally {
+      DatabaseManager.getInstance().closeResources(null, preparedStatement);
+      databaseManager.releaseConnection(connection);
     }
   }
 
   @Override
   public void deleteExam(Date examDate, String examType) {
-    try (Connection connection = databaseManager.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(ExamQueryConstants.DELETE_EXAM)) {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    try {
+      connection = databaseManager.getConnection();
+      preparedStatement = connection.prepareStatement(ExamQueryConstants.DELETE_EXAM);
 
       preparedStatement.setDate(1, new java.sql.Date(examDate.getTime()));
       preparedStatement.setString(2, examType);
@@ -63,26 +78,36 @@ public class ExamDAOImpl implements ExamDAO {
 
     } catch (SQLException e) {
       e.printStackTrace();
+    } finally {
+      DatabaseManager.getInstance().closeResources(null, preparedStatement);
+      databaseManager.releaseConnection(connection);
     }
   }
 
   @Override
   public Exam getExamByDateAndType(Date examDate, String examType) {
     Exam exam = null;
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet resultSet = null;
 
-    try (Connection connection = databaseManager.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(ExamQueryConstants.GET_EXAM_BY_DATE_AND_TYPE)) {
+    try {
+      connection = databaseManager.getConnection();
+      preparedStatement = connection.prepareStatement(ExamQueryConstants.GET_EXAM_BY_DATE_AND_TYPE);
 
       preparedStatement.setDate(1, new java.sql.Date(examDate.getTime()));
       preparedStatement.setString(2, examType);
 
-      try (ResultSet resultSet = preparedStatement.executeQuery()) {
-        if (resultSet.next()) {
-          exam = extractExamFromResultSet(resultSet);
-        }
+      resultSet = preparedStatement.executeQuery();
+
+      if (resultSet.next()) {
+        exam = extractExamFromResultSet(resultSet);
       }
     } catch (SQLException e) {
       e.printStackTrace();
+    } finally {
+      DatabaseManager.getInstance().closeResources(resultSet, preparedStatement);
+      databaseManager.releaseConnection(connection);
     }
 
     return exam;
@@ -91,10 +116,14 @@ public class ExamDAOImpl implements ExamDAO {
   @Override
   public List<Exam> getAllExams() {
     List<Exam> exams = new ArrayList<>();
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet resultSet = null;
 
-    try (Connection connection = databaseManager.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(ExamQueryConstants.GET_ALL_EXAMS);
-        ResultSet resultSet = preparedStatement.executeQuery()) {
+    try {
+      connection = databaseManager.getConnection();
+      preparedStatement = connection.prepareStatement(ExamQueryConstants.GET_ALL_EXAMS);
+      resultSet = preparedStatement.executeQuery();
 
       while (resultSet.next()) {
         Exam exam = extractExamFromResultSet(resultSet);
@@ -102,6 +131,9 @@ public class ExamDAOImpl implements ExamDAO {
       }
     } catch (SQLException e) {
       e.printStackTrace();
+    } finally {
+      DatabaseManager.getInstance().closeResources(resultSet, preparedStatement);
+      databaseManager.releaseConnection(connection);
     }
 
     return exams;

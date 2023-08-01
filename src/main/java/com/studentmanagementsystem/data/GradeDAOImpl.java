@@ -21,8 +21,11 @@ public class GradeDAOImpl implements GradeDAO {
 
   @Override
   public void addGrade(Grade grade) {
-    try (Connection connection = databaseManager.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(GradeQueryConstants.INSERT_GRADE)) {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    try {
+      connection = databaseManager.getConnection();
+      preparedStatement = connection.prepareStatement(GradeQueryConstants.INSERT_GRADE);
 
       preparedStatement.setInt(1, grade.getGradeId());
       preparedStatement.setDouble(2, grade.getCGPA());
@@ -32,13 +35,19 @@ public class GradeDAOImpl implements GradeDAO {
 
     } catch (SQLException e) {
       e.printStackTrace();
+    } finally {
+      DatabaseManager.getInstance().closeResources(null, preparedStatement);
+      databaseManager.releaseConnection(connection);
     }
   }
 
   @Override
   public void updateGrade(Grade grade) {
-    try (Connection connection = databaseManager.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(GradeQueryConstants.UPDATE_GRADE)) {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    try {
+      connection = databaseManager.getConnection();
+      preparedStatement = connection.prepareStatement(GradeQueryConstants.UPDATE_GRADE);
 
       preparedStatement.setDouble(1, grade.getCGPA());
       preparedStatement.setString(2, grade.getSemester());
@@ -48,37 +57,53 @@ public class GradeDAOImpl implements GradeDAO {
 
     } catch (SQLException e) {
       e.printStackTrace();
+    } finally {
+      DatabaseManager.getInstance().closeResources(null, preparedStatement);
+      databaseManager.releaseConnection(connection);
     }
   }
 
   @Override
   public void deleteGrade(String gradeId) {
-    try (Connection connection = databaseManager.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(GradeQueryConstants.DELETE_GRADE)) {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    try {
+      connection = databaseManager.getConnection();
+      preparedStatement = connection.prepareStatement(GradeQueryConstants.DELETE_GRADE);
 
       preparedStatement.setString(1, gradeId);
       preparedStatement.executeUpdate();
 
     } catch (SQLException e) {
       e.printStackTrace();
+    } finally {
+      DatabaseManager.getInstance().closeResources(null, preparedStatement);
+      databaseManager.releaseConnection(connection);
     }
   }
 
   @Override
   public Grade getGradeById(String gradeId) {
     Grade grade = null;
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet resultSet = null;
 
-    try (Connection connection = databaseManager.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(GradeQueryConstants.GET_GRADE_BY_ID)) {
+    try {
+      connection = databaseManager.getConnection();
+      preparedStatement = connection.prepareStatement(GradeQueryConstants.GET_GRADE_BY_ID);
 
       preparedStatement.setString(1, gradeId);
-      try (ResultSet resultSet = preparedStatement.executeQuery()) {
-        if (resultSet.next()) {
-          grade = extractGradeFromResultSet(resultSet);
-        }
+      resultSet = preparedStatement.executeQuery();
+
+      if (resultSet.next()) {
+        grade = extractGradeFromResultSet(resultSet);
       }
     } catch (SQLException e) {
       e.printStackTrace();
+    } finally {
+      DatabaseManager.getInstance().closeResources(resultSet, preparedStatement);
+      databaseManager.releaseConnection(connection);
     }
 
     return grade;
@@ -87,10 +112,14 @@ public class GradeDAOImpl implements GradeDAO {
   @Override
   public List<Grade> getAllGrades() {
     List<Grade> grades = new ArrayList<>();
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet resultSet = null;
 
-    try (Connection connection = databaseManager.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(GradeQueryConstants.GET_ALL_GRADES);
-        ResultSet resultSet = preparedStatement.executeQuery()) {
+    try {
+      connection = databaseManager.getConnection();
+      preparedStatement = connection.prepareStatement(GradeQueryConstants.GET_ALL_GRADES);
+      resultSet = preparedStatement.executeQuery();
 
       while (resultSet.next()) {
         Grade grade = extractGradeFromResultSet(resultSet);
@@ -98,6 +127,9 @@ public class GradeDAOImpl implements GradeDAO {
       }
     } catch (SQLException e) {
       e.printStackTrace();
+    } finally {
+      DatabaseManager.getInstance().closeResources(resultSet, preparedStatement);
+      databaseManager.releaseConnection(connection);
     }
 
     return grades;
