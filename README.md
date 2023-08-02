@@ -37,25 +37,7 @@ To get started with the project, follow the instructions below:
 
 ## Features
 
-### Login Page
 
-- The system provides a simple login page for students and admin. Users can enter their credentials to access the system.
-
-### Student Dashboard
-
-- Students can view the courses they are enrolled in for the current semester. This information is retrieved from the MySQL database and displayed in a user-friendly format.
-
-### Course Registration
-
-- Students can register for courses on a designated registration day, as determined by the admin. They can select from the available courses and submit their registration.
-
-### Admin Panel
-
-- The admin has access to a comprehensive admin panel to manage various aspects of the system.
-- Admin can manage students, including adding new students, updating their information, and removing students if necessary.
-- Admin can manage teachers, assign them courses, and update their details.
-- Admin can create and manage courses, including adding new courses, modifying course information, and deleting courses.
-- Admin can define the registration day and manage the course registration process.
 
 ## License
 
