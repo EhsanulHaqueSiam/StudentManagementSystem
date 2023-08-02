@@ -35,7 +35,7 @@ To get started with the project, follow the instructions below:
    - Build the project.
    - Run the project to launch the Student Management System.
 
-## Features
+<!-- ## Features -->
 
 
 
