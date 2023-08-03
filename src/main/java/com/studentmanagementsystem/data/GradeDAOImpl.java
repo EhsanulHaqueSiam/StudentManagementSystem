@@ -11,10 +11,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The GradeDAOImpl class provides the implementation for the GradeDAO interface.
+ * It interacts with the database to perform CRUD operations on Grade entities.
+ */
 public class GradeDAOImpl implements GradeDAO {
 
   private DatabaseManager databaseManager;
 
+  /**
+   * Constructs a new GradeDAOImpl instance.
+   */
   public GradeDAOImpl() {
     databaseManager = DatabaseManager.getInstance();
   }
@@ -135,6 +142,13 @@ public class GradeDAOImpl implements GradeDAO {
     return grades;
   }
 
+  /**
+   * Extracts a Grade object from the ResultSet.
+   *
+   * @param resultSet The ResultSet containing Grade information.
+   * @return A Grade object extracted from the ResultSet.
+   * @throws SQLException If a database access error occurs.
+   */
   private Grade extractGradeFromResultSet(ResultSet resultSet) throws SQLException {
     int gradeId = resultSet.getInt("G_ID");
     double cgpa = resultSet.getDouble("cgpa");

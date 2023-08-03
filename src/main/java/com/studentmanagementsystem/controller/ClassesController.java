@@ -7,15 +7,26 @@ import main.java.com.studentmanagementsystem.view.ClassesView;
 
 import java.util.List;
 
+/**
+ * The ClassesController class handles user interactions and business logic related to
+ * managing classes in the Student Management System.
+ */
 public class ClassesController {
   private final ClassesDAO classesDAO;
   private final ClassesView classesView;
 
+  /**
+   * Initializes the ClassesController with the required DAO and View instances.
+   */
   public ClassesController() {
     this.classesDAO = new ClassesDAOImpl();
     this.classesView = new ClassesView();
   }
 
+  /**
+   * Starts the main loop of the classes management system, displaying the menu and
+   * handling user input.
+   */
   public void run() {
     boolean running = true;
     while (running) {
@@ -48,12 +59,18 @@ public class ClassesController {
     }
   }
 
+  /**
+   * Adds a new class to the system based on user input.
+   */
   private void addClass() {
     Classes classes = classesView.getInputClass();
     classesDAO.addClass(classes);
     classesView.showMessage("Class added successfully!");
   }
 
+  /**
+   * Updates an existing class's information based on user input.
+   */
   private void updateClass() {
     String className = classesView.getInputString("Enter the name of the class to update: ");
     Classes classes = classesDAO.getClassByName(className);
@@ -67,12 +84,18 @@ public class ClassesController {
     }
   }
 
+  /**
+   * Deletes an existing class from the system based on user input.
+   */
   private void deleteClass() {
     String className = classesView.getInputString("Enter the name of the class to delete: ");
     classesDAO.deleteClass(className);
     classesView.showMessage("Class deleted successfully!");
   }
 
+  /**
+   * Retrieves and displays details of a class based on user input.
+   */
   private void getClassByName() {
     String className = classesView.getInputString("Enter the name of the class to retrieve: ");
     Classes classes = classesDAO.getClassByName(className);
@@ -84,11 +107,17 @@ public class ClassesController {
     }
   }
 
+  /**
+   * Retrieves and displays details of all classes in the system.
+   */
   private void getAllClasses() {
     List<Classes> classesList = classesDAO.getAllClasses();
     classesView.showAllClasses(classesList);
   }
 
+  /**
+   * Main method to start the ClassesController and run the classes management system.
+   */
   public static void main(String[] args) {
     ClassesController controller = new ClassesController();
     controller.run();

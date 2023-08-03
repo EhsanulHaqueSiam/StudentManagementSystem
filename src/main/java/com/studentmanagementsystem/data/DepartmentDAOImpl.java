@@ -11,6 +11,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * An implementation of the DepartmentDAO interface that performs CRUD operations on department records in the database.
+ */
 public class DepartmentDAOImpl implements DepartmentDAO {
 
   private DatabaseManager databaseManager;

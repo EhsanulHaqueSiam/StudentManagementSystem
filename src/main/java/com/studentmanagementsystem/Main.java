@@ -10,6 +10,7 @@ public class Main {
   public static void main(String[] args) throws SQLException {
     Scanner scanner = new Scanner(System.in);
 
+    // Register a shutdown hook to ensure proper closing of the database connection
     Runtime.getRuntime().addShutdownHook(new Thread(() -> {
       DatabaseManager.getInstance().close();
     }));

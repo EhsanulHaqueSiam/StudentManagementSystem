@@ -11,10 +11,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The `ClassesDAOImpl` class provides implementations for CRUD operations
+ * on class records in the database.
+ */
 public class ClassesDAOImpl implements ClassesDAO {
 
   private DatabaseManager databaseManager;
 
+  /**
+   * Constructs a new `ClassesDAOImpl` instance.
+   */
   public ClassesDAOImpl() {
     databaseManager = DatabaseManager.getInstance();
   }
@@ -134,6 +141,13 @@ public class ClassesDAOImpl implements ClassesDAO {
     return classesList;
   }
 
+  /**
+   * Extracts a `Classes` object from a `ResultSet` row.
+   *
+   * @param resultSet The `ResultSet` containing class data.
+   * @return A `Classes` object representing the class data.
+   * @throws SQLException If a database access error occurs.
+   */
   private Classes extractClassesFromResultSet(ResultSet resultSet) throws SQLException {
     String className = resultSet.getString("Cl_name");
     String classRoomno = resultSet.getString("Cl_roomno");

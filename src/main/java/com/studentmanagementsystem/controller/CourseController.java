@@ -7,15 +7,26 @@ import main.java.com.studentmanagementsystem.view.CourseView;
 
 import java.util.List;
 
+/**
+ * The CourseController class handles user interactions and business logic related to
+ * managing courses in the Student Management System.
+ */
 public class CourseController {
   private final CourseDAO courseDAO;
   private final CourseView courseView;
 
+  /**
+   * Initializes the CourseController with the required DAO and View instances.
+   */
   public CourseController() {
     this.courseDAO = new CourseDAOImpl();
     this.courseView = new CourseView();
   }
 
+  /**
+   * Starts the main loop of the course management system, displaying the menu and
+   * handling user input.
+   */
   public void run() {
     boolean running = true;
     while (running) {
@@ -48,12 +59,18 @@ public class CourseController {
     }
   }
 
+  /**
+   * Adds a new course to the system based on user input.
+   */
   private void addCourse() {
     Course course = courseView.getInputCourse();
     courseDAO.addCourse(course);
     courseView.showMessage("Course added successfully!");
   }
 
+  /**
+   * Updates an existing course's information based on user input.
+   */
   private void updateCourse() {
     int courseId = courseView.getInput("Enter the ID of the course to update: ");
     Course course = courseDAO.getCourseById(String.valueOf(courseId));
@@ -68,12 +85,18 @@ public class CourseController {
     }
   }
 
+  /**
+   * Deletes an existing course from the system based on user input.
+   */
   private void deleteCourse() {
     int courseId = courseView.getInput("Enter the ID of the course to delete: ");
     courseDAO.deleteCourse(String.valueOf(courseId));
     courseView.showMessage("Course deleted successfully!");
   }
 
+  /**
+   * Retrieves and displays details of a course based on user input.
+   */
   private void getCourseById() {
     int courseId = courseView.getInput("Enter the ID of the course to retrieve: ");
     Course course = courseDAO.getCourseById(String.valueOf(courseId));
@@ -85,11 +108,17 @@ public class CourseController {
     }
   }
 
+  /**
+   * Retrieves and displays details of all courses in the system.
+   */
   private void getAllCourses() {
     List<Course> courses = courseDAO.getAllCourses();
     courseView.showAllCourses(courses);
   }
 
+  /**
+   * Main method to start the CourseController and run the course management system.
+   */
   public static void main(String[] args) {
     CourseController controller = new CourseController();
     controller.run();

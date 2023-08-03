@@ -11,10 +11,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * An implementation of the FacultyDAO interface that provides database access operations for Faculty entities.
+ */
 public class FacultyDAOImpl implements FacultyDAO {
 
   private DatabaseManager databaseManager;
 
+  /**
+   * Constructor to initialize the FacultyDAOImpl with a DatabaseManager instance.
+   */
   public FacultyDAOImpl() {
     databaseManager = DatabaseManager.getInstance();
   }
@@ -135,6 +141,13 @@ public class FacultyDAOImpl implements FacultyDAO {
     return faculties;
   }
 
+  /**
+   * Extracts Faculty information from a ResultSet.
+   *
+   * @param resultSet The ResultSet containing Faculty data.
+   * @return A Faculty object extracted from the ResultSet.
+   * @throws SQLException If a database access error occurs.
+   */
   private Faculty extractFacultyFromResultSet(ResultSet resultSet) throws SQLException {
     int facultyId = resultSet.getInt("F_ID");
     String name = resultSet.getString("F_name");

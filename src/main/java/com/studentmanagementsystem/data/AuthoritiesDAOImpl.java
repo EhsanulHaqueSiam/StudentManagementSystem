@@ -9,10 +9,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * The `AuthoritiesDAOImpl` class provides the implementation for performing CRUD operations
+ * on authority records in the database.
+ */
 public class AuthoritiesDAOImpl implements AuthoritiesDAO {
 
   private DatabaseManager databaseManager;
 
+  /**
+   * Initializes a new instance of `AuthoritiesDAOImpl`.
+   */
   public AuthoritiesDAOImpl() {
     databaseManager = DatabaseManager.getInstance();
   }
@@ -108,6 +115,13 @@ public class AuthoritiesDAOImpl implements AuthoritiesDAO {
     return authority;
   }
 
+  /**
+   * Extracts authority information from a `ResultSet` object.
+   *
+   * @param resultSet The `ResultSet` containing authority data.
+   * @return The `Authorities` object representing the extracted authority.
+   * @throws SQLException If an SQL error occurs while extracting data.
+   */
   private Authorities extractAuthorityFromResultSet(ResultSet resultSet) throws SQLException {
     String authorityName = resultSet.getString("A_name");
     String authorityRole = resultSet.getString("A_role");

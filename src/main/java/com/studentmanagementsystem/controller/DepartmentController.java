@@ -7,15 +7,26 @@ import main.java.com.studentmanagementsystem.view.DepartmentView;
 
 import java.util.List;
 
+/**
+ * The DepartmentController class manages user interactions and business logic related
+ * to handling departments within the Student Management System.
+ */
 public class DepartmentController {
   private final DepartmentDAO departmentDAO;
   private final DepartmentView departmentView;
 
+  /**
+   * Initializes the DepartmentController with the necessary DAO and View instances.
+   */
   public DepartmentController() {
     this.departmentDAO = new DepartmentDAOImpl();
     this.departmentView = new DepartmentView();
   }
 
+  /**
+   * Starts the main loop of the department management system, displaying the menu and
+   * handling user input.
+   */
   public void run() {
     boolean running = true;
     while (running) {
@@ -48,12 +59,18 @@ public class DepartmentController {
     }
   }
 
+  /**
+   * Adds a new department to the system based on user input.
+   */
   private void addDepartment() {
     Department department = departmentView.getInputDepartment();
     departmentDAO.addDepartment(department);
     departmentView.showMessage("Department added successfully!");
   }
 
+  /**
+   * Updates an existing department's information based on user input.
+   */
   private void updateDepartment() {
     int deptId = departmentView.getInput("Enter the ID of the department to update: ");
     Department department = departmentDAO.getDepartmentById(String.valueOf(deptId));
@@ -68,12 +85,18 @@ public class DepartmentController {
     }
   }
 
+  /**
+   * Deletes an existing department from the system based on user input.
+   */
   private void deleteDepartment() {
     int deptId = departmentView.getInput("Enter the ID of the department to delete: ");
     departmentDAO.deleteDepartment(String.valueOf(deptId));
     departmentView.showMessage("Department deleted successfully!");
   }
 
+  /**
+   * Retrieves and displays details of a department based on user input.
+   */
   private void getDepartmentById() {
     int deptId = departmentView.getInput("Enter the ID of the department to retrieve: ");
     Department department = departmentDAO.getDepartmentById(String.valueOf(deptId));
@@ -85,11 +108,17 @@ public class DepartmentController {
     }
   }
 
+  /**
+   * Retrieves and displays details of all departments in the system.
+   */
   private void getAllDepartments() {
     List<Department> departments = departmentDAO.getAllDepartments();
     departmentView.showAllDepartments(departments);
   }
 
+  /**
+   * Main method to start the DepartmentController and run the department management system.
+   */
   public static void main(String[] args) {
     DepartmentController controller = new DepartmentController();
     controller.run();

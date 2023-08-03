@@ -11,10 +11,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The implementation of the CourseDAO interface for performing CRUD operations on course records in the database.
+ */
 public class CourseDAOImpl implements CourseDAO {
 
   private DatabaseManager databaseManager;
 
+  /**
+   * Constructs a new CourseDAOImpl instance.
+   */
   public CourseDAOImpl() {
     databaseManager = DatabaseManager.getInstance();
   }
@@ -136,6 +142,13 @@ public class CourseDAOImpl implements CourseDAO {
     return courses;
   }
 
+  /**
+   * Extracts course information from the result set.
+   *
+   * @param resultSet The result set containing course data.
+   * @return The extracted Course object.
+   * @throws SQLException If a database access error occurs.
+   */
   private Course extractCourseFromResultSet(ResultSet resultSet) throws SQLException {
     int courseId = resultSet.getInt("C_ID");
     String courseName = resultSet.getString("C_name");

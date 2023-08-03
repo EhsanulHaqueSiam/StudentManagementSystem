@@ -7,10 +7,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import main.java.com.studentmanagementsystem.data.query.StudentQueryConstants;
 import main.java.com.studentmanagementsystem.model.Student;
 import main.java.com.studentmanagementsystem.util.DatabaseManager;
 
+/**
+ * The StudentDAOImpl class implements the StudentDAO interface and provides methods
+ * for performing CRUD (Create, Read, Update, Delete) operations on Student entities
+ * in the database.
+ */
 public class StudentDAOImpl implements StudentDAO {
 
   private final DatabaseManager databaseManager;
@@ -133,6 +139,13 @@ public class StudentDAOImpl implements StudentDAO {
     return students;
   }
 
+  /**
+   * Extracts a Student object from the ResultSet obtained from a database query.
+   *
+   * @param resultSet The ResultSet containing student data.
+   * @return A Student object extracted from the ResultSet.
+   * @throws SQLException If a database access error occurs.
+   */
   private Student extractStudentFromResultSet(ResultSet resultSet) throws SQLException {
     int studentId = resultSet.getInt("S_ID");
     String name = resultSet.getString("S_name");
@@ -144,5 +157,3 @@ public class StudentDAOImpl implements StudentDAO {
     return new Student(studentId, name, contact, email, enrollYear);
   }
 }
-
-

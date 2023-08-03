@@ -11,6 +11,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The ProgramDAOImpl class implements the ProgramDAO interface and provides
+ * methods to interact with the database for Program entities.
+ */
 public class ProgramDAOImpl implements ProgramDAO {
 
   private DatabaseManager databaseManager;
