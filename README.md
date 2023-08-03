@@ -1,6 +1,6 @@
 # Student Management System 📚
 
-Welcome to the Student Management System project! 🚀 This project aims to provide a user-friendly interface for managing student information, course registration, and administration tasks. The system is built using Java Swing for the graphical user interface (GUI) and utilizes a MySQL database for data storage and retrieval.
+Welcome to the Student Management System project! 🚀 This project offers efficient management of student information, course registration, and administration tasks. The system is built using Java and interacts with a MySQL database for seamless data storage and retrieval.
 
 ## Getting Started 🏁
 
