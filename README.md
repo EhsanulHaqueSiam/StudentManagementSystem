@@ -48,7 +48,7 @@ A heartfelt thank you to our esteemed faculty:
 
 Your guidance, wisdom, and support have been invaluable in shaping this project.
 
-## Connection Pooling 🔗
+## Connection Pool 🔗
 
 The `DatabaseManager` class provides a centralized and efficient way to manage database connections using a connection pool. It follows the Singleton pattern to ensure a single instance of the connection pool is maintained throughout the application's lifecycle.
 
