@@ -8,7 +8,8 @@ import main.java.com.studentmanagementsystem.view.ClassesView;
 import java.util.List;
 
 /**
- * The ClassesController class handles user interactions and business logic related to
+ * The ClassesController class handles user interactions and business logic
+ * related to
  * managing classes in the Student Management System.
  */
 public class ClassesController {
@@ -24,7 +25,8 @@ public class ClassesController {
   }
 
   /**
-   * Starts the main loop of the classes management system, displaying the menu and
+   * Starts the main loop of the classes management system, displaying the menu
+   * and
    * handling user input.
    */
   public void run() {
@@ -115,11 +117,4 @@ public class ClassesController {
     classesView.showAllClasses(classesList);
   }
 
-  /**
-   * Main method to start the ClassesController and run the classes management system.
-   */
-  public static void main(String[] args) {
-    ClassesController controller = new ClassesController();
-    controller.run();
-  }
 }

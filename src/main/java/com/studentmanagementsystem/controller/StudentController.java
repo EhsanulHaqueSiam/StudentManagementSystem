@@ -91,8 +91,4 @@ public class StudentController {
     studentView.showAllStudents(students);
   }
 
-  public static void main(String[] args) {
-    StudentController controller = new StudentController();
-    controller.run();
-  }
 }

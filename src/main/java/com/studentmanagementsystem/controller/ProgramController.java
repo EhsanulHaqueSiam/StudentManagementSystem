@@ -91,8 +91,4 @@ public class ProgramController {
     programView.showAllPrograms(programs);
   }
 
-  public static void main(String[] args) {
-    ProgramController controller = new ProgramController();
-    controller.run();
-  }
 }

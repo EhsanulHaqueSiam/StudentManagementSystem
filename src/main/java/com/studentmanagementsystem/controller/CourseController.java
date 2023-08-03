@@ -8,7 +8,8 @@ import main.java.com.studentmanagementsystem.view.CourseView;
 import java.util.List;
 
 /**
- * The CourseController class handles user interactions and business logic related to
+ * The CourseController class handles user interactions and business logic
+ * related to
  * managing courses in the Student Management System.
  */
 public class CourseController {
@@ -116,11 +117,4 @@ public class CourseController {
     courseView.showAllCourses(courses);
   }
 
-  /**
-   * Main method to start the CourseController and run the course management system.
-   */
-  public static void main(String[] args) {
-    CourseController controller = new CourseController();
-    controller.run();
-  }
 }

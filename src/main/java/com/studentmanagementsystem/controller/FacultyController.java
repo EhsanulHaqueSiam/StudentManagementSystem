@@ -90,8 +90,4 @@ public class FacultyController {
     facultyView.showAllFaculties(faculties);
   }
 
-  public static void main(String[] args) {
-    FacultyController controller = new FacultyController();
-    controller.run();
-  }
 }

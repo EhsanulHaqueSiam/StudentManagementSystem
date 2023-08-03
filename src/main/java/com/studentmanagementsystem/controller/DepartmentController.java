@@ -8,7 +8,8 @@ import main.java.com.studentmanagementsystem.view.DepartmentView;
 import java.util.List;
 
 /**
- * The DepartmentController class manages user interactions and business logic related
+ * The DepartmentController class manages user interactions and business logic
+ * related
  * to handling departments within the Student Management System.
  */
 public class DepartmentController {
@@ -16,7 +17,8 @@ public class DepartmentController {
   private final DepartmentView departmentView;
 
   /**
-   * Initializes the DepartmentController with the necessary DAO and View instances.
+   * Initializes the DepartmentController with the necessary DAO and View
+   * instances.
    */
   public DepartmentController() {
     this.departmentDAO = new DepartmentDAOImpl();
@@ -24,7 +26,8 @@ public class DepartmentController {
   }
 
   /**
-   * Starts the main loop of the department management system, displaying the menu and
+   * Starts the main loop of the department management system, displaying the menu
+   * and
    * handling user input.
    */
   public void run() {
@@ -116,11 +119,4 @@ public class DepartmentController {
     departmentView.showAllDepartments(departments);
   }
 
-  /**
-   * Main method to start the DepartmentController and run the department management system.
-   */
-  public static void main(String[] args) {
-    DepartmentController controller = new DepartmentController();
-    controller.run();
-  }
 }

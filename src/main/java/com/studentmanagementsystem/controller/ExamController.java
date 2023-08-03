@@ -95,8 +95,4 @@ public class ExamController {
     examView.showAllExams(exams);
   }
 
-  public static void main(String[] args) {
-    ExamController controller = new ExamController();
-    controller.run();
-  }
 }

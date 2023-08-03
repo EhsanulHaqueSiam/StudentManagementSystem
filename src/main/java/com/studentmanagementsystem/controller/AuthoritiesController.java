@@ -6,7 +6,8 @@ import main.java.com.studentmanagementsystem.model.Authorities;
 import main.java.com.studentmanagementsystem.view.AuthoritiesView;
 
 /**
- * The AuthoritiesController class handles user interactions and business logic related to
+ * The AuthoritiesController class handles user interactions and business logic
+ * related to
  * managing authorities in the Student Management System.
  */
 public class AuthoritiesController {
@@ -14,7 +15,8 @@ public class AuthoritiesController {
   private final AuthoritiesView authoritiesView;
 
   /**
-   * Initializes the AuthoritiesController with the required DAO and View instances.
+   * Initializes the AuthoritiesController with the required DAO and View
+   * instances.
    */
   public AuthoritiesController() {
     this.authoritiesDAO = new AuthoritiesDAOImpl();
@@ -22,7 +24,8 @@ public class AuthoritiesController {
   }
 
   /**
-   * Starts the main loop of the authorities management system, displaying the menu and
+   * Starts the main loop of the authorities management system, displaying the
+   * menu and
    * handling user input.
    */
   public void run() {
@@ -102,11 +105,4 @@ public class AuthoritiesController {
     }
   }
 
-  /**
-   * Main method to start the AuthoritiesController and run the authorities management system.
-   */
-  public static void main(String[] args) {
-    AuthoritiesController controller = new AuthoritiesController();
-    controller.run();
-  }
 }

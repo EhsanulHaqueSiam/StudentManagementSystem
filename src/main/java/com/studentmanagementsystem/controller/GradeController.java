@@ -90,8 +90,4 @@ public class GradeController {
     gradeView.showAllGrades(grades);
   }
 
-  public static void main(String[] args) {
-    GradeController controller = new GradeController();
-    controller.run();
-  }
 }
