@@ -17,7 +17,7 @@ To start using the Student Management System, follow these steps:
 1. **Clone the Repository:** Start by cloning this repository to your local machine:
 
    ```sh
-   git clone https://github.com/EhsanulHaqueSiam/student-management-system.git
+   git clone https://github.com/EhsanulHaqueSiam/StudentManagementSystem.git
    ```
 
 2. **Database Configuration:** Open the `src/main/resources/config.properties` file and configure the database connection:
@@ -30,13 +30,13 @@ To start using the Student Management System, follow these steps:
 
    ```sh
    # Navigate to the project directory
-   cd student-management-system
+   cd StudentManagementSystem
 
    # Compile the source code
-   javac -cp .:lib/* -d bin src/main/java/com/studentmanagementsystem/Main.java
+   javac -cp .:lib/* -d bin src/main/java/com/StudentManagementSystem/Main.java
 
    # Run the project
-   java -cp .:lib/*:bin com.studentmanagementsystem.Main
+   java -cp .:lib/*:bin com.StudentManagementSystem.Main
    ```
 
 ## Acknowledgments 🙏
