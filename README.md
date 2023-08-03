@@ -1,6 +1,6 @@
 # Student Management System 📚
 
-Welcome to the Student Management System project! 🚀 This project aims to provide a user-friendly interface for managing student information, course registration, and administration tasks. The system is built using Java Swing for the graphical user interface (GUI) and utilizes a MySQL database for data storage and retrieval.
+Welcome to the Student Management System project! 🚀 This project offers efficient management of student information, course registration, and administration tasks. The system is built using Java and interacts with a MySQL database for seamless data storage and retrieval.
 
 ## Getting Started 🏁
 
@@ -17,7 +17,7 @@ To start using the Student Management System, follow these steps:
 1. **Clone the Repository:** Start by cloning this repository to your local machine:
 
    ```sh
-   git clone https://github.com/EhsanulHaqueSiam/student-management-system.git
+   git clone https://github.com/EhsanulHaqueSiam/StudentManagementSystem.git
    ```
 
 2. **Database Configuration:** Open the `src/main/resources/config.properties` file and configure the database connection:
@@ -30,13 +30,13 @@ To start using the Student Management System, follow these steps:
 
    ```sh
    # Navigate to the project directory
-   cd student-management-system
+   cd StudentManagementSystem
 
    # Compile the source code
-   javac -cp .:lib/* -d bin src/main/java/com/studentmanagementsystem/Main.java
+   javac -cp .:lib/* -d bin src/main/java/com/StudentManagementSystem/Main.java
 
    # Run the project
-   java -cp .:lib/*:bin com.studentmanagementsystem.Main
+   java -cp .:lib/*:bin com.StudentManagementSystem.Main
    ```
 
 ## Acknowledgments 🙏
@@ -48,7 +48,7 @@ A heartfelt thank you to our esteemed faculty:
 
 Your guidance, wisdom, and support have been invaluable in shaping this project.
 
-## Connection Pooling 🔗
+## Connection Pool 🔗
 
 The `DatabaseManager` class provides a centralized and efficient way to manage database connections using a connection pool. It follows the Singleton pattern to ensure a single instance of the connection pool is maintained throughout the application's lifecycle.
 
