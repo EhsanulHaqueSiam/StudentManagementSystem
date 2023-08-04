@@ -1,58 +1,67 @@
 package test.java.com.studentmanagementsystem.model;
 
 import main.java.com.studentmanagementsystem.model.Course;
-import main.java.com.studentmanagementsystem.model.Student;
-import main.java.com.studentmanagementsystem.model.Faculty;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.List;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CourseTest {
-  private Course course;
-  private Faculty teacher;
-  private List<Student> students;
 
-  @Before
+  private Course course;
+
+  @BeforeEach
   public void setUp() {
-    teacher = new Faculty("T001", "John Doe", "A+", "1980-01-01", "9876543210",
-        "john@sm.com", "PhD", "Male", "Section A", 50000, 5000, 60000);
-    students = Arrays.asList(
-        new Student("S001", "Alice", "A+", "1998-12-12", "1234567890", "alice@sm.com", "BSc", "Female", "Fall 2022-2023"),
-        new Student("S002", "Bob", "B+", "1998-01-01", "2345678901", "bob@sm.com", "MSc", "Male", "Fall 2022-2023")
-    );
-    course = new Course("C001", "Math 101", "This is a basic math course.", 3, teacher, students);
+    course = new Course(1, "Mathematics", 3, "12 weeks");
   }
 
   @Test
   public void testGetCourseId() {
-    Assert.assertEquals("C001", course.getCourseId());
+    assertEquals(1, course.getCourseId());
   }
 
   @Test
   public void testGetCourseName() {
-    Assert.assertEquals("Math 101", course.getCourseName());
-  }
-
-  @Test
-  public void testGetCourseDescription() {
-    Assert.assertEquals("This is a basic math course.", course.getCourseDescription());
+    assertEquals("Mathematics", course.getCourseName());
   }
 
   @Test
   public void testGetCourseCredits() {
-    Assert.assertEquals(3, course.getCourseCredits());
+    assertEquals(3, course.getCourseCredits());
   }
 
   @Test
-  public void testGetCourseInstructor() {
-    Assert.assertEquals(teacher, course.getCourseInstructor());
+  public void testGetCourseDuration() {
+    assertEquals("12 weeks", course.getCourseDuration());
   }
 
   @Test
-  public void testGetEnrolledStudents() {
-    Assert.assertEquals(students, course.getEnrolledStudents());
+  public void testSetCourseId() {
+    course.setCourseId(2);
+    assertEquals(2, course.getCourseId());
+  }
+
+  @Test
+  public void testSetCourseName() {
+    course.setCourseName("Physics");
+    assertEquals("Physics", course.getCourseName());
+  }
+
+  @Test
+  public void testSetCourseCredits() {
+    course.setCourseCredits(4);
+    assertEquals(4, course.getCourseCredits());
+  }
+
+  @Test
+  public void testSetCourseDuration() {
+    course.setCourseDuration("10 weeks");
+    assertEquals("10 weeks", course.getCourseDuration());
+  }
+
+  @Test
+  public void testToString() {
+    String expected = "Course(courseId=1, courseName=Mathematics, courseCredits=3, courseDuration=12 weeks)";
+    assertEquals(expected, course.toString());
   }
 }

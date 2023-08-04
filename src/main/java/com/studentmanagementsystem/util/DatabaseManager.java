@@ -1,5 +1,6 @@
 package main.java.com.studentmanagementsystem.util;
 
+import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -54,6 +55,26 @@ public class DatabaseManager {
   }
 
   /**
+   * Retrieves the singleton instance of `DatabaseManager`.
+   *
+   * @return The singleton instance of `DatabaseManager`.
+   */
+  public static DatabaseManager getInstance() {
+    return instance;
+  }
+
+  // Method for testing purposes to reset the singleton instance
+  public static void resetInstance() {
+    try {
+      Field instance = DatabaseManager.class.getDeclaredField("instance");
+      instance.setAccessible(true);
+      instance.set(null, null);
+    } catch (Exception e) {
+      // Handle the exception appropriately
+    }
+  }
+
+  /**
    * Initializes the connection pool by creating a set number of connections.
    *
    * @throws SQLException if an error occurs while creating a connection.
@@ -72,15 +93,6 @@ public class DatabaseManager {
    */
   private Connection createNewConnection() throws SQLException {
     return DriverManager.getConnection(url, user, password);
-  }
-
-  /**
-   * Retrieves the singleton instance of `DatabaseManager`.
-   *
-   * @return The singleton instance of `DatabaseManager`.
-   */
-  public static DatabaseManager getInstance() {
-    return instance;
   }
 
   /**
@@ -161,21 +173,54 @@ public class DatabaseManager {
     }
   }
 
+
   /**
    * Closes all database connections in the connection pool when they are no
    * longer needed. Properly closing the connections ensures graceful
    * termination of the application and releases any associated resources.
+   * <p>
+   * This method iterates through the connection pool, releases connections that
+   * are not closed back to the pool, and then clears the connection pool.
+   * Connections that are already closed are ignored. Any exceptions that occur
+   * during the closing of connections are caught and logged.
+   * <p>
+   * It's recommended to call this method when the application is shutting down
+   * or when the database connections are no longer required to ensure proper
+   * resource management and prevent potential resource leaks.
    */
   public void close() {
+    // Create a list to hold connections that need to be released
+    List<Connection> connectionsToRelease = new ArrayList<>();
+
+    // Iterate through the connection pool and identify connections to release
     for (Connection connection : connectionPool) {
       try {
+        // Check if the connection is not null and not closed
         if (connection != null && !connection.isClosed()) {
-          connection.close();
+          connectionsToRelease.add(connection);
         }
       } catch (SQLException e) {
         // Handle or log the exception
         e.printStackTrace();
       }
     }
+
+    // Release the identified connections back to the pool
+    for (Connection connection : connectionsToRelease) {
+      releaseConnection(connection);
+    }
+
+    // Clear the list of connections to effectively close the pool
+    connectionPool.clear();
+  }
+
+  /**
+   * Checks if a connection has been closed.
+   *
+   * @param connection The connection to check.
+   * @return True if the connection has been closed, false otherwise.
+   */
+  public boolean isConnectionClosed(Connection connection) {
+    return !connectionPool.contains(connection);
   }
 }

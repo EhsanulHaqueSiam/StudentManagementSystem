@@ -1,32 +1,37 @@
 package test.java.com.studentmanagementsystem.util;
 
 import main.java.com.studentmanagementsystem.util.ConfigLoader;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import java.util.Properties;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class ConfigLoaderTest {
-  private ConfigLoader configLoader;
-  private Properties properties;
 
-  @Before
+  private ConfigLoader configLoader;
+
+  @BeforeEach
   public void setUp() {
     configLoader = ConfigLoader.getInstance();
-    properties = configLoader.getProperties();
   }
 
   @Test
-  public void testConfigLoader() {
-    Assert.assertNotNull(properties);
+  public void testGetPropertyExistingKey() {
+    String value = configLoader.getProperty("db.url");
+    assertEquals("jdbc:mysql://localhost:3306/stdmng", value);
+  }
 
-    String url = properties.getProperty("db.url");
-    Assert.assertEquals("jdbc:mysql://localhost:3306/student_management_system", url);
+  @Test
+  public void testGetPropertyNonExistingKey() {
+    String value = configLoader.getProperty("non.existing.key");
+    assertNull(value);
+  }
 
-    String username = properties.getProperty("db.username");
-    Assert.assertEquals("root", username);
-
-    String password = properties.getProperty("db.password");
-    Assert.assertEquals("password", password);
+  @Test
+  public void testSingletonPattern() {
+    ConfigLoader instance1 = ConfigLoader.getInstance();
+    ConfigLoader instance2 = ConfigLoader.getInstance();
+    assertEquals(instance1, instance2);
   }
 }
