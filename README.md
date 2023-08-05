@@ -3,19 +3,19 @@
 Welcome to the Student Management System project! 🚀 This project empowers you to efficiently manage student information, handle course registrations, and oversee administrative tasks. Developed in Java and integrated with a MySQL database, it ensures seamless data storage and retrieval.
 
 ## Table of Contents
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Setup Process](#setup-process)
-- [Features](#features)
-  - [Connection Pool](#connection-pool)
-  - [ConfigLoader Utility](#configloader-utility)
-  - [DAO Layer](#dao-layer)
-  - [Query Constants](#query-constants)
-  - [MVC Design Pattern](#mvc-design-pattern)
-  - [Testing with JUnit 5](#testing-with-junit-5)
-- [Project Structure Highlights](#project-structure-highlights)
-- [Acknowledgments](#acknowledgments)
-- [Contact](#contact)
+- [Getting Started](#getting-started-)
+  - [Prerequisites](#prerequisites-%EF%B8%8F)
+  - [Setup Process](#setup-process-%EF%B8%8F)
+- [Features](#features-)
+  - [Connection Pool](#connection-pool-)
+  - [ConfigLoader Utility](#configloader-utility-%EF%B8%8F)
+  - [DAO Layer](#dao-layer-%EF%B8%8F)
+  - [Query Constants](#query-constants-)
+  - [MVC Design Pattern](#mvc-design-pattern-%EF%B8%8F)
+  - [Testing with JUnit 5](#testing-with-junit-5-)
+- [Project Structure Highlights](#project-structure-highlights-)
+- [Acknowledgments](#acknowledgments-)
+- [Contact](#contact-)
 
 ## Getting Started 🏁
 
