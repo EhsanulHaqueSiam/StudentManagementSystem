@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 public class ConfigLoaderTest {
 
@@ -13,7 +14,7 @@ public class ConfigLoaderTest {
 
   @BeforeEach
   public void setUp() {
-    configLoader = ConfigLoader.getInstance();
+    configLoader = ConfigLoader.getInstance("config");
   }
 
   @Test
@@ -30,8 +31,8 @@ public class ConfigLoaderTest {
 
   @Test
   public void testSingletonPattern() {
-    ConfigLoader instance1 = ConfigLoader.getInstance();
-    ConfigLoader instance2 = ConfigLoader.getInstance();
-    assertEquals(instance1, instance2);
+    ConfigLoader instance1 = ConfigLoader.getInstance("config");
+    ConfigLoader instance2 = ConfigLoader.getInstance("config");
+    assertSame(instance1, instance2);
   }
 }
