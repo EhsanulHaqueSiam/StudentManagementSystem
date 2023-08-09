@@ -6,16 +6,10 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Current File",
-            "request": "launch",
-            "mainClass": "${file}"
-        },
-        {
-            "type": "java",
             "name": "Main",
             "request": "launch",
             "mainClass": "main.java.com.studentmanagementsystem.Main",
-            "projectName": "StudentManagementSystem"
+            "projectName": "StudentManagementSystem_291e2d66"
         }
     ]
 }

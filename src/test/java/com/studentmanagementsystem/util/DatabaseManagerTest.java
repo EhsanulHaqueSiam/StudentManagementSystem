@@ -47,6 +47,7 @@ public class DatabaseManagerTest {
     Connection reusedConnection = databaseManager.getConnection();
     assertEquals(connection, reusedConnection);
 
+    // Close the reused connection
     reusedConnection.close();
   }
 
@@ -67,14 +68,13 @@ public class DatabaseManagerTest {
     databaseManager.releaseConnection(connection1);
     databaseManager.releaseConnection(connection2);
 
-    // Close the database manager
+    // Close the database manager (including released connections)
     databaseManager.close();
 
     assertTrue(databaseManager.isConnectionClosed(connection1));
     assertTrue(databaseManager.isConnectionClosed(connection2));
   }
 
-
-
-
+  // Add more test methods as needed for monitoring, metrics, and security-related
+  // functionality
 }
