@@ -47,7 +47,7 @@ public class DatabaseManager {
   private DatabaseManager() {
     try {
       // Load database configuration
-      ConfigLoader configLoader = ConfigLoader.getInstance();
+      ConfigLoader configLoader = ConfigLoader.getInstance("src/main/resources/config.properties");
       url = configLoader.getProperty("db.url");
       user = configLoader.getProperty("db.username");
       password = configLoader.getProperty("db.password");
