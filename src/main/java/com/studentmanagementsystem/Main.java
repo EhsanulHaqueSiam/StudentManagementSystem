@@ -10,6 +10,12 @@ public class Main {
   public static void main(String[] args) throws SQLException {
     Scanner scanner = new Scanner(System.in);
 
+    // Start the database connection initialization in a separate thread
+    Thread dbConnectionThread = new Thread(() -> {
+      DatabaseManager.getInstance(); // Initialize the database connection
+    });
+    dbConnectionThread.start(); // Start the thread
+
     // Register a shutdown hook to ensure proper closing of the database connection
     Runtime.getRuntime().addShutdownHook(new Thread(() -> {
       DatabaseManager.getInstance().close();
@@ -29,6 +35,13 @@ public class Main {
     System.out.print("Enter the number of the controller you want to run: ");
 
     int choice = scanner.nextInt();
+
+    // Wait for the database connection thread to finish
+    try {
+      dbConnectionThread.join();
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
 
     switch (choice) {
       case 1:
