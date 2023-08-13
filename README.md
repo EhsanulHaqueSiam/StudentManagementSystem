@@ -3,6 +3,7 @@
 Welcome to the Student Management System project! 🚀 This project empowers you to efficiently manage student information, handle course registrations, and oversee administrative tasks. Developed in Java and integrated with a MySQL database, it ensures seamless data storage and retrieval.
 
 ## Table of Contents
+
 - [Getting Started](#getting-started-)
   - [Prerequisites](#prerequisites-%EF%B8%8F)
   - [Setup Process](#setup-process-%EF%B8%8F)
@@ -73,7 +74,6 @@ This intelligent management of connections not only enhances the performance of 
 
 With the Connection Pool in place, you can focus on seamlessly retrieving and storing data without worrying about the complexities of managing individual database connections.
 
-
 ### ConfigLoader Utility ⚙️
 
 Simplify configuration management with the `ConfigLoader` class. Fetch properties from files with ease, thanks to its Singleton pattern implementation. Experience enhanced code readability and intuitive methods for accessing configuration properties.
@@ -105,6 +105,7 @@ Explore the organized project structure:
 - **VSCode Settings:** Inside the `.vscode` directory, discover tailored configuration files like `launch.json` and `settings.json` designed for seamless integration with Visual Studio Code.
 
 - **Clear Hierarchy:** Navigate the `src` directory, which boasts distinct subdirectories for various project aspects, such as:
+
   - **Main:** Home to the primary application code, including the pivotal entry point `Main.java`.
   - **Controller:** Manage user interface interactions and data orchestration, e.g., `AuthoritiesController`, `ClassesController`.
   - **Data:** Houses Data Access Object (DAO) classes, each comprising an interface and implementation, e.g., `AuthoritiesDAO`, `AuthoritiesDAOImpl`.
@@ -120,7 +121,7 @@ Explore the organized project structure:
 
 We extend our sincere gratitude to our esteemed faculty:
 
-🎓 **MD SAJID BIN-FAISAL**
+🎓 **MD SAJID BIN-FAISAL**<br>
 🎓 **Database Faculty, AIUB**
 
 Your invaluable guidance has played a pivotal role in shaping this project, fostering a deep understanding of database management and software development principles.
