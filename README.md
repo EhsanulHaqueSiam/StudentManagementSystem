@@ -116,6 +116,10 @@ Explore the organized project structure:
   - **Test:** Dedicated to JUnit 5 test classes, fortifying the system's robustness and correctness.
 
 - **Well-Documented Code:** Delve into the well-commented and documented Java source files, offering insights into functionality, usage, and design considerations. This comprehensive documentation eases comprehension, maintenance, and extension of the system.
+  
+- **Multi-Threading with Main Thread:** The application leverages multi-threading in the main thread to enhance user experience and database interaction. While the user interacts with the command line interface, the main thread concurrently establishes and maintains a database connection in the background. This design ensures that the user doesn't experience delays caused by database connections, leading to a seamless and responsive user experience.
+
+- **Graceful Shutdown with Shutdown Hook:** To ensure proper closing of the database connection when the program ends, a shutdown hook is registered. The shutdown hook, implemented as a separate thread, closes the database connection gracefully, preventing any resource leaks or data corruption.
 
 ## Acknowledgments 🙏
 
