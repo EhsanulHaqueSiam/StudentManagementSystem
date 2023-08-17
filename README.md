@@ -100,7 +100,7 @@ Explore the organized project structure:
 
 - **Separate Test Resources:** The `test` directory holds essential resources like `expectedOutput.txt`, `testConfig.properties`, and `testData.json` for effective testing.
 
-- **Library Dependencies:** The `lib` directory contains critical library JAR files, including `junit-platform-console-standalone-1.10.0.jar`, `lombok.jar`, and `mysql-connector-j-8.1.0.jar`.
+- **Library Dependencies:** The `lib` directory contains critical library JAR files, including `junit-platform-console-standalone-1.10.0.jar`, `ojdbc11.jar`, and `mysql-connector-j-8.1.0.jar`.
 
 - **VSCode Settings:** Inside the `.vscode` directory, discover tailored configuration files like `launch.json` and `settings.json` designed for seamless integration with Visual Studio Code.
 
